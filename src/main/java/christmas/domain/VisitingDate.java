@@ -1,10 +1,8 @@
 package christmas.domain;
 
-import christmas.constants.DateConstants;
-import christmas.exception.ErrorMessage;
-
-import static christmas.constants.DateConstants.*;
-import static christmas.exception.ErrorMessage.*;
+import static christmas.constants.DateConstants.EVENT_END_DATE;
+import static christmas.constants.DateConstants.EVENT_START_DATE;
+import static christmas.exception.ErrorMessage.INVALID_DATE;
 
 public class VisitingDate {
     private final int date;
@@ -15,7 +13,7 @@ public class VisitingDate {
     }
 
     public static VisitingDate from(int date) {
-       return new VisitingDate(date);
+        return new VisitingDate(date);
     }
 
     private void validateDate(int date) {

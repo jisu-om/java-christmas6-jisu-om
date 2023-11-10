@@ -41,4 +41,8 @@ public enum MenuItem {
     public MenuCategory getCategory() {
         return category;
     }
+
+    public long getPrice() {
+        return price;
+    }
 }

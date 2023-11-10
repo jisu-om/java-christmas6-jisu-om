@@ -5,5 +5,5 @@ public enum MenuCategory {
     MAIN,
     DESSERT,
     DRINK,
-    NONE;
+    NONE
 }

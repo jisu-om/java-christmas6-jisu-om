@@ -9,13 +9,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class OrdersTest {
-    private static final String VALID_MENU = "양송이수프";
-    private static final String VALID_MAIN = "티본스테이크";
-    private static final String VALID_DRINK1 = "제로콜라";
-    private static final String VALID_DRINK2 = "샴페인";
-    private static final int VALID_QUANTITY1 = 1;
-    private static final int VALID_QUANTITY2 = 2;
-    private static final int VALID_QUANTITY10 = 10;
+    String VALID_MENU = "양송이수프";
+    String VALID_MAIN = "티본스테이크";
+    String VALID_DRINK1 = "제로콜라";
+    String VALID_DRINK2 = "샴페인";
+    int VALID_QUANTITY1 = 1;
+    int VALID_QUANTITY2 = 2;
+    int VALID_QUANTITY10 = 10;
     List<OrderItem> orderItems;
     Orders orders;
 

@@ -21,4 +21,8 @@ public class Orders {
         OrdersValidationUtils.validateNotOnlyDrinks(orders);
         OrdersValidationUtils.validateTotalQuantity(orders);
     }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 }
