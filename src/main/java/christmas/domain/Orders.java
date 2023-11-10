@@ -1,52 +1,58 @@
 package christmas.domain;
 
-import org.junit.jupiter.api.Order;
-
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static christmas.domain.MenuCategory.*;
+import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
 public class Orders {
-//    private final EnumMap<Menu, Integer> orders;
-    private final List<Order> orders;
+    private static final int MAXIMUM_ORDER_TOTAL_QUANTITY = 20;
+    private final List<OrderItem> orderItems;
 
-    private Orders(EnumMap<Menu, Integer> orders) {
-        this.orders = orders;
+    private Orders(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
-    public static Orders from(Map<String, Integer> orders) {
-        validate(orders);
-        //TODO Map<String, Integer> -> EnumMap<Menu, Integer> 로 변환
-        EnumMap<Menu, Integer> validatedOrders = null;
-        return new Orders(validatedOrders);
+    public static Orders from(List<OrderItem> orderItems) {
+        validate(orderItems);
+        return new Orders(orderItems);
     }
 
-    private static void validate(Map<String, Integer> orders) {
-        //TODO
-         validateExistence(orders);
-         validateDuplicates(orders);
-         validateOnlyDrinks(orders);
-         validateQuantity(orders);
-         validateTotalQuantity(orders);
+    private static void validate(List<OrderItem> orders) {
+        validateDuplicates(orders);
+        validateNotOnlyDrinks(orders);
+        validateTotalQuantity(orders);
     }
 
-    private static void validateExistence(Map<String, Integer> orders) {
+    private static void validateDuplicates(List<OrderItem> orders) {
         //TODO validationUtils 로 빼도 좋겠다.
+        Set<String> uniqueOrders = orders.stream()
+                .map(item -> item.provideMenuItem().name())
+                .collect(Collectors.toSet());
+        if (orders.size() != uniqueOrders.size()) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
     }
 
-    private static void validateDuplicates(Map<String, Integer> orders) {
+    private static void validateNotOnlyDrinks(List<OrderItem> orders) {
         //TODO validationUtils 로 빼도 좋겠다.
+        orders.stream()
+                .map(item -> item.provideMenuItem().getCategory())
+                .filter(category -> !category.equals(DRINK))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
 
-    private static void validateOnlyDrinks(Map<String, Integer> orders) {
+    private static void validateTotalQuantity(List<OrderItem> orders) {
         //TODO validationUtils 로 빼도 좋겠다.
-    }
+        int totalQuantity = orders.stream()
+                .mapToInt(OrderItem::provideQuantity)
+                .sum();
 
-    private static void validateQuantity(Map<String, Integer> orders) {
-        //TODO validationUtils 로 빼도 좋겠다.
-    }
-
-    private static void validateTotalQuantity(Map<String, Integer> orders) {
-        //TODO validationUtils 로 빼도 좋겠다.
+        if (totalQuantity > MAXIMUM_ORDER_TOTAL_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
     }
 }

@@ -3,7 +3,7 @@ package christmas.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -16,14 +16,16 @@ public class OrdersTest {
     private static final int VALID_QUANTITY1 = 1;
     private static final int VALID_QUANTITY2 = 2;
     private static final int VALID_QUANTITY10 = 10;
-    Map<String, Integer> orderItems;
+    List<OrderItem> orderItems;
     Orders orders;
 
     @DisplayName("Orders 정상 생성")
     @Test
     void create() {
         //given
-        orderItems = Map.of(VALID_EPITIZER, VALID_QUANTITY1);
+        OrderItem orderItem1 = OrderItem.of(VALID_MENU, VALID_QUANTITY1);
+        OrderItem orderItem2 = OrderItem.of(VALID_DRINK1, VALID_QUANTITY1);
+        orderItems = List.of(orderItem1, orderItem2);
 
         //when
         orders = Orders.from(orderItems);
@@ -36,9 +38,9 @@ public class OrdersTest {
     @Test
     void exception_duplicated_menus() {
         // given
-        orderItems = Map.of(
-                VALID_MENU, VALID_QUANTITY1,
-                VALID_MENU, VALID_QUANTITY2);
+        OrderItem orderItem1 = OrderItem.of(VALID_MENU, VALID_QUANTITY1);
+        OrderItem orderItem2 = OrderItem.of(VALID_MENU, VALID_QUANTITY2);
+        orderItems = List.of(orderItem1, orderItem2);
 
         // when, then
         assertThatThrownBy(() -> Orders.from(orderItems))
@@ -49,9 +51,9 @@ public class OrdersTest {
     @Test
     void exception_orders_drink_only() {
         // given
-        orderItems = Map.of(
-                VALID_DRINK1, VALID_QUANTITY2,
-                VALID_DRINK2, VALID_QUANTITY2);
+        OrderItem orderItem1 = OrderItem.of(VALID_DRINK1, VALID_QUANTITY1);
+        OrderItem orderItem2 = OrderItem.of(VALID_DRINK2, VALID_QUANTITY1);
+        orderItems = List.of(orderItem1, orderItem2);
 
         // when, then
         assertThatThrownBy(() -> Orders.from(orderItems))
@@ -62,11 +64,10 @@ public class OrdersTest {
     @Test
     void exception_invalid_menu_total_quantity() {
         // given
-        orderItems = Map.of(
-                VALID_EPITIZER, VALID_QUANTITY10,
-                VALID_MAIN, VALID_QUANTITY10,
-                VALID_DRINK1, VALID_QUANTITY1,
-                VALID_DRINK2, VALID_QUANTITY2);
+        OrderItem orderItem1 = OrderItem.of(VALID_MENU, VALID_QUANTITY10);
+        OrderItem orderItem2 = OrderItem.of(VALID_MAIN, VALID_QUANTITY10);
+        OrderItem orderItem3 = OrderItem.of(VALID_DRINK1, VALID_QUANTITY1);
+        orderItems = List.of(orderItem1, orderItem2, orderItem3);
 
         // when, then
         assertThatThrownBy(() -> Orders.from(orderItems))
