@@ -1,10 +1,14 @@
 package christmas.domain;
 
+import org.junit.jupiter.api.Order;
+
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class Orders {
-    private final EnumMap<Menu, Integer> orders;
+//    private final EnumMap<Menu, Integer> orders;
+    private final List<Order> orders;
 
     private Orders(EnumMap<Menu, Integer> orders) {
         this.orders = orders;
@@ -27,22 +31,22 @@ public class Orders {
     }
 
     private static void validateExistence(Map<String, Integer> orders) {
-
+        //TODO validationUtils 로 빼도 좋겠다.
     }
 
     private static void validateDuplicates(Map<String, Integer> orders) {
-
+        //TODO validationUtils 로 빼도 좋겠다.
     }
 
     private static void validateOnlyDrinks(Map<String, Integer> orders) {
-
+        //TODO validationUtils 로 빼도 좋겠다.
     }
 
     private static void validateQuantity(Map<String, Integer> orders) {
-
+        //TODO validationUtils 로 빼도 좋겠다.
     }
 
     private static void validateTotalQuantity(Map<String, Integer> orders) {
-
+        //TODO validationUtils 로 빼도 좋겠다.
     }
 }
