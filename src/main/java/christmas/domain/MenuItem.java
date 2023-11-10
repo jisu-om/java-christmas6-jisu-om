@@ -6,9 +6,9 @@ import static christmas.domain.MenuCategory.*;
 import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
 public enum MenuItem {
-    양송이수프(EPITIZER, 6_000L),
-    타파스(EPITIZER, 5_500L),
-    시저샐러드(EPITIZER, 8_000L),
+    양송이수프(APPETIZER, 6_000L),
+    타파스(APPETIZER, 5_500L),
+    시저샐러드(APPETIZER, 8_000L),
     티본스테이크(MAIN, 55_000L),
     바비큐립(MAIN, 54_000L),
     해산물파스타(MAIN, 35_000L),

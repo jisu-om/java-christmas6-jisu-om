@@ -1,7 +1,7 @@
 package christmas.domain;
 
 public enum MenuCategory {
-    EPITIZER,
+    APPETIZER,
     MAIN,
     DESSERT,
     DRINK,
