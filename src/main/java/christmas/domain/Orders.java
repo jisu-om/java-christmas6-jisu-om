@@ -1,11 +1,8 @@
 package christmas.domain;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import christmas.validationUtils.OrdersValidationUtils;
 
-import static christmas.domain.MenuCategory.*;
-import static christmas.exception.ErrorMessage.INVALID_ORDER;
+import java.util.List;
 
 public class Orders {
     private static final int MAXIMUM_ORDER_TOTAL_QUANTITY = 20;
@@ -21,38 +18,8 @@ public class Orders {
     }
 
     private static void validate(List<OrderItem> orders) {
-        validateDuplicates(orders);
-        validateNotOnlyDrinks(orders);
-        validateTotalQuantity(orders);
-    }
-
-    private static void validateDuplicates(List<OrderItem> orders) {
-        //TODO validationUtils 로 빼도 좋겠다.
-        Set<String> uniqueOrders = orders.stream()
-                .map(item -> item.provideMenuItem().name())
-                .collect(Collectors.toSet());
-        if (orders.size() != uniqueOrders.size()) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
-    }
-
-    private static void validateNotOnlyDrinks(List<OrderItem> orders) {
-        //TODO validationUtils 로 빼도 좋겠다.
-        orders.stream()
-                .map(item -> item.provideMenuItem().getCategory())
-                .filter(category -> !category.equals(DRINK))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
-    }
-
-    private static void validateTotalQuantity(List<OrderItem> orders) {
-        //TODO validationUtils 로 빼도 좋겠다.
-        int totalQuantity = orders.stream()
-                .mapToInt(OrderItem::provideQuantity)
-                .sum();
-
-        if (totalQuantity > MAXIMUM_ORDER_TOTAL_QUANTITY) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
+        OrdersValidationUtils.validateDuplicates(orders);
+        OrdersValidationUtils.validateNotOnlyDrinks(orders);
+        OrdersValidationUtils.validateTotalQuantity(orders, MAXIMUM_ORDER_TOTAL_QUANTITY);
     }
 }
