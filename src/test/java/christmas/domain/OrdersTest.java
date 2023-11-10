@@ -30,7 +30,7 @@ public class OrdersTest {
         orderItems = Map.of(VALID_EPITIZER, VALID_QUANTITY1);
 
         //when
-        orders = Orders.of(orderItems);
+        orders = Orders.from(orderItems);
 
         //then
         assertThat(orders).isNotNull();
@@ -43,7 +43,7 @@ public class OrdersTest {
         orderItems = Map.of(INVALID_MENU, VALID_QUANTITY1);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -56,7 +56,7 @@ public class OrdersTest {
                 VALID_EPITIZER, VALID_QUANTITY2);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -67,7 +67,7 @@ public class OrdersTest {
         orderItems = Map.of(VALID_DRINK1, VALID_QUANTITY2);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -80,29 +80,29 @@ public class OrdersTest {
                 VALID_DRINK2, VALID_QUANTITY2);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("메뉴 개수가 0이면 예외가 발생한다.")
     @Test
-    void exception_invalid_menu_quantity() {
+    void exception_invalid_menu_quantity_zero() {
         // given
         orderItems = Map.of(VALID_EPITIZER, ZERO_QUANTITY);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @DisplayName("메뉴 개수가 음수면 예외가 발생한다.")
     @Test
-    void exception_invalid_menu_quantity() {
+    void exception_invalid_menu_quantity_negative() {
         // given
         orderItems = Map.of(VALID_EPITIZER, NEGATIVE_QUANTITY);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -117,7 +117,7 @@ public class OrdersTest {
                 VALID_DRINK2, VALID_QUANTITY2);
 
         // when, then
-        assertThatThrownBy(() -> Orders.of(orderItems))
+        assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
