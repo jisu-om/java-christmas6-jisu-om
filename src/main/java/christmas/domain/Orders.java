@@ -5,7 +5,6 @@ import christmas.validationUtils.OrdersValidationUtils;
 import java.util.List;
 
 public class Orders {
-    private static final int MAXIMUM_ORDER_TOTAL_QUANTITY = 20;
     private final List<OrderItem> orderItems;
 
     private Orders(List<OrderItem> orderItems) {
@@ -20,6 +19,6 @@ public class Orders {
     private static void validate(List<OrderItem> orders) {
         OrdersValidationUtils.validateDuplicates(orders);
         OrdersValidationUtils.validateNotOnlyDrinks(orders);
-        OrdersValidationUtils.validateTotalQuantity(orders, MAXIMUM_ORDER_TOTAL_QUANTITY);
+        OrdersValidationUtils.validateTotalQuantity(orders);
     }
 }

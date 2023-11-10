@@ -1,9 +1,8 @@
 package christmas.domain;
 
-import static christmas.exception.ErrorMessage.INVALID_ORDER;
+import christmas.validationUtils.OrderItemValidationUtils;
 
 public class OrderItem {
-    private static final int MINIMUM_QUANTITY = 1;
     private final MenuItem menuItem;
     private final int quantity;
 
@@ -13,20 +12,12 @@ public class OrderItem {
     }
 
     public static OrderItem of(String menu, int quantity) {
-        validatePositive(quantity);
+        OrderItemValidationUtils.validatePositive(quantity);
         MenuItem validMenuItem = convertToMenu(menu);
         return new OrderItem(validMenuItem, quantity);
     }
 
-    private static void validatePositive(int quantity) {
-        //TODO validationUtils 로 빼기
-        if (quantity < MINIMUM_QUANTITY) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
-        }
-    }
-
     private static MenuItem convertToMenu(String menu) {
-        //TODO Converter? Parser? ValidationUtils?
         return MenuItem.findByName(menu);
     }
 
