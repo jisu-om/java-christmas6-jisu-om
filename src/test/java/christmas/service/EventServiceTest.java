@@ -27,7 +27,7 @@ public class EventServiceTest {
         Orders orders = Orders.from(List.of(orderItem1, orderItem2));
 
         //when
-        EventService eventService = EventService.create(visitingDate, orders);
+        EventService eventService = EventService.of(visitingDate, orders);
         Events events = eventService.provideEvents();
 
         //then

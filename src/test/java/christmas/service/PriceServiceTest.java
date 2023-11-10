@@ -27,14 +27,14 @@ public class PriceServiceTest {
         long actualPrice = MenuItem.valueOf(VALID_APPETIZER).getPrice() * VALID_QUANTITY2
                 + MenuItem.valueOf(VALID_DRINK).getPrice() * VALID_QUANTITY1;
 
-        EventService eventService = EventService.create(visitingDate, orders);
+        EventService eventService = EventService.of(visitingDate, orders);
         Events events = eventService.provideEvents();
-        PriceService priceService = PriceService.create(orders, events);
+        PriceService priceService = PriceService.of(orders, events);
 
         // when
         PricingInfo pricingInfo = priceService.providePricingInfo();
 
         // then
-        Assertions.assertThat(pricingInfo.getOriginalPrice()).isEqualTo(actualPrice);
+        Assertions.assertThat(pricingInfo.provideOriginalPrice()).isEqualTo(actualPrice);
     }
 }
