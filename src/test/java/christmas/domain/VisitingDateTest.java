@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -25,7 +24,7 @@ public class VisitingDateTest {
     @ParameterizedTest(name = "[{index}] {0} 을 전달하면 방문날짜 생성 시 예외가 발생한다.")
     @ValueSource(ints = {0, -1, 32, 1000})
     void throwsException(int element) {
-        assertThatThrownBy(() -> visitingDate.from(element))
+        assertThatThrownBy(() -> VisitingDate.from(element))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
