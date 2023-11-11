@@ -21,6 +21,10 @@ public class OrderItem {
         return MenuItem.findByName(menu);
     }
 
+    public MenuCategory convertToCategory() {
+        return menuItem.getCategory();
+    }
+
     public MenuItem provideMenuItem() {
         return menuItem;
     }

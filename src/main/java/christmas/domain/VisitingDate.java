@@ -1,7 +1,7 @@
 package christmas.domain;
 
-import static christmas.constants.DateConstants.EVENT_END_DATE;
-import static christmas.constants.DateConstants.EVENT_START_DATE;
+import static christmas.constants.DateConstants.EVENT_END;
+import static christmas.constants.DateConstants.EVENT_START;
 import static christmas.exception.ErrorMessage.INVALID_DATE;
 
 public class VisitingDate {
@@ -17,8 +17,12 @@ public class VisitingDate {
     }
 
     private void validateDate(int date) {
-        if (date < EVENT_START_DATE || date > EVENT_END_DATE) {
+        if (date < EVENT_START || date > EVENT_END) {
             throw new IllegalArgumentException(INVALID_DATE.getMessage());
         }
+    }
+
+    public int getDate() {
+        return date;
     }
 }
