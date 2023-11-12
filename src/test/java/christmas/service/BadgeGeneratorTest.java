@@ -26,8 +26,8 @@ public class BadgeGeneratorTest {
 //        OrderItem orderItem3 = OrderItem.of(VALID_DRINK, VALID_QUANTITY1);  //제로콜라 3000 * 1
 //        Orders orders = Orders.from(List.of(orderItem1, orderItem2, orderItem3));  //총주문금액 : 14만 3천원
 //
-//        EventService eventService = EventService.of(visitingDate, orders);
-//        Events events = eventService.findMatchingEvents();
+//        EventFinder eventService = EventFinder.of(visitingDate, orders);
+//        MatchingEvents events = eventService.findMatchingEvents();
 //        EventBenefitCalculator priceService = EventBenefitCalculator.of(orders, events);
 //        PricingInfo pricingInfo = priceService.providePricingInfo();
 //        long originalPrice = pricingInfo.provideOriginalPrice();  //143_000

@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.ChristmasManager;
+import christmas.service.ChristmasManager;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.ResultDto;
@@ -38,7 +38,7 @@ public class ChristmasController {
         christmasManager = ChristmasManager.of(date, orders);
 
         //TODO Orders 를 바탕으로 OrdersDto 생성해서 outputView 에 전달 (주문 메뉴 출력)
-        OrdersDto ordersDto = christmasManager.createOrdersDto();
+        OrdersDto ordersDto = OrdersDto.of(orders);
 
 
         //TODO christmasManager 에게 할인전 총주문금액, 혜택내역, 할인금액, 총혜택금액, 할인후 예상결제금액보, 배지정보 계산 후

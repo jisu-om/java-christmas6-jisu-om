@@ -1,6 +1,5 @@
 package christmas.domain.event;
 
-import christmas.constants.DiscountConstants;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 
@@ -78,7 +77,7 @@ public enum EventDetail {
     public static List<EventDetail> findByCondition(VisitingDate date, Orders orders) {
         return Arrays.stream(EventDetail.values())
                 .filter(condition -> condition.dateCondition.contains(date.getDate()))
-                .filter(condition -> orders.calculateOriginalTotalPrice() >= condition.priceCondition)
+                .filter(condition -> orders.calculateOriginalTotalAmount() >= condition.priceCondition)
                 .filter(condition -> condition.itemCondition.apply(orders))
                 .toList();
     }

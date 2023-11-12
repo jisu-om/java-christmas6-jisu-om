@@ -36,7 +36,7 @@ public class Orders {
                 .anyMatch(category -> category.equals(comparingCategory));
     }
 
-    public long calculateOriginalTotalPrice() {
+    public long calculateOriginalTotalAmount() {
         return orderItems.stream()
                 .mapToLong(OrderItem::provideItemOriginalPrice)
                 .sum();

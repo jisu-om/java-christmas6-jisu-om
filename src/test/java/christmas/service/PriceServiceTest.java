@@ -27,8 +27,8 @@ public class PriceServiceTest {
 //        long actualPrice = MenuItem.valueOf(VALID_APPETIZER).getPrice() * VALID_QUANTITY2
 //                + MenuItem.valueOf(VALID_DRINK).getPrice() * VALID_QUANTITY1;
 //
-//        EventService eventService = EventService.of(visitingDate, orders);
-//        Events events = eventService.findMatchingEvents();
+//        EventFinder eventService = EventFinder.of(visitingDate, orders);
+//        MatchingEvents events = eventService.findMatchingEvents();
 //        EventBenefitCalculator priceService = EventBenefitCalculator.of(orders, events);
 //
 //        // when
