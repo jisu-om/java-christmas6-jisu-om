@@ -1,4 +1,4 @@
 package christmas.dto;
 
-public class ResultDto {
+public class EventsDto {
 }
