@@ -25,7 +25,7 @@ public class EventServiceTest {
 
         //when
         EventService eventService = EventService.of(visitingDate, orders);
-        Events events = eventService.provideEvents();
+        Events events = eventService.findMatchingEvents();
 
         //then
         assertThat(events.size()).isEqualTo(1);

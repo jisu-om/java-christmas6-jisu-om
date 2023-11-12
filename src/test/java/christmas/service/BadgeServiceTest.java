@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.domain.event.Events;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
@@ -27,7 +28,7 @@ public class BadgeServiceTest {
         Orders orders = Orders.from(List.of(orderItem1, orderItem2, orderItem3));  //총주문금액 : 14만 3천원
 
         EventService eventService = EventService.of(visitingDate, orders);
-        Events events = eventService.provideEvents();
+        Events events = eventService.findMatchingEvents();
         PriceService priceService = PriceService.of(orders, events);
         PricingInfo pricingInfo = priceService.providePricingInfo();
         long originalPrice = pricingInfo.provideOriginalPrice();  //143_000

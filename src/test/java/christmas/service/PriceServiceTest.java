@@ -28,7 +28,7 @@ public class PriceServiceTest {
                 + MenuItem.valueOf(VALID_DRINK).getPrice() * VALID_QUANTITY1;
 
         EventService eventService = EventService.of(visitingDate, orders);
-        Events events = eventService.provideEvents();
+        Events events = eventService.findMatchingEvents();
         PriceService priceService = PriceService.of(orders, events);
 
         // when

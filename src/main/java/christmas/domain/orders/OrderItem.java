@@ -34,4 +34,8 @@ public class OrderItem {
     public int provideQuantity() {
         return quantity;
     }
+
+    public long provideItemOriginalPrice() {
+        return menuItem.getPrice() * quantity;
+    }
 }

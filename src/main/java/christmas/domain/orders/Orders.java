@@ -30,6 +30,12 @@ public class Orders {
                 .count();
     }
 
+    public long calculateOriginalPrice() {
+        return orderItems.stream()
+                .mapToLong(OrderItem::provideItemOriginalPrice)
+                .sum();
+    }
+
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
