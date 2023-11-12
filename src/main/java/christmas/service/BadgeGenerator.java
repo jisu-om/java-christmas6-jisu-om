@@ -1,4 +1,4 @@
 package christmas.service;
 
-public class PriceService {
+public class BadgeGenerator {
 }

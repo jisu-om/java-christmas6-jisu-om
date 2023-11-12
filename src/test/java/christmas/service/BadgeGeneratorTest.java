@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class BadgeServiceTest {
+public class BadgeGeneratorTest {
     String VALID_APPETIZER = "양송이수프";
     String VALID_MAIN = "티본스테이크";
     String VALID_DRINK = "제로콜라";
@@ -26,14 +26,14 @@ public class BadgeServiceTest {
 //        OrderItem orderItem3 = OrderItem.of(VALID_DRINK, VALID_QUANTITY1);  //제로콜라 3000 * 1
 //        Orders orders = Orders.from(List.of(orderItem1, orderItem2, orderItem3));  //총주문금액 : 14만 3천원
 //
-//        EventService eventService = EventService.of(visitingDate, orders);
+//        EventFinder eventService = EventFinder.of(visitingDate, orders);
 //        Events events = eventService.findMatchingEvents();
-//        PriceService priceService = PriceService.of(orders, events);
+//        EventBenefitCalculator priceService = EventBenefitCalculator.of(orders, events);
 //        PricingInfo pricingInfo = priceService.providePricingInfo();
 //        long originalPrice = pricingInfo.provideOriginalPrice();  //143_000
 //
 //        // when
-//        BadgeService badgeService = BadgeService.from(originalPrice);
+//        BadgeGenerator badgeService = BadgeGenerator.from(originalPrice);
 //
 //        // then
 //        Badge badge = badgeService.proviceBadge();

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EventServiceTest {
+public class EventFinderTest {
     String VALID_APPETIZER = "양송이수프";
     String VALID_DRINK = "제로콜라";
     int VALID_QUANTITY1 = 1;
@@ -27,7 +27,7 @@ public class EventServiceTest {
         Orders orders = Orders.from(List.of(orderItem1, orderItem2));
 
         //when
-        EventService eventService = EventService.of(visitingDate, orders);
+        EventFinder eventService = EventFinder.of(visitingDate, orders);
 
         //then  //1일, 15000원 - 1000(크리스마스 디데이 할인)
         assertThat(eventService.provideEventNames()).containsExactly(EventDetail.CHRISTMAS_D_DAY.getEventName());
