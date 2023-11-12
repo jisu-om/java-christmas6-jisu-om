@@ -30,7 +30,13 @@ public class Orders {
                 .count();
     }
 
-    public long calculateOriginalPrice() {
+    public boolean existsOrderItemByCategory(MenuCategory comparingCategory) {
+        return orderItems.stream()
+                .map(OrderItem::convertToCategory)
+                .anyMatch(category -> category.equals(comparingCategory));
+    }
+
+    public long calculateOriginalTotalPrice() {
         return orderItems.stream()
                 .mapToLong(OrderItem::provideItemOriginalPrice)
                 .sum();

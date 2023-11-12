@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.domain.event.EventDetail;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
@@ -7,6 +8,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EventServiceTest {
     String VALID_APPETIZER = "양송이수프";
@@ -25,10 +28,9 @@ public class EventServiceTest {
 
         //when
         EventService eventService = EventService.of(visitingDate, orders);
-        Events events = eventService.findMatchingEvents();
 
-        //then
-        assertThat(events.size()).isEqualTo(1);
-        //1일, 15000원 - 1000(크리스마스 디데이 할인)
+        //then  //1일, 15000원 - 1000(크리스마스 디데이 할인)
+        assertThat(eventService.provideEventNames()).containsExactly(EventDetail.CHRISTMAS_D_DAY.getEventName());
+        assertThat(eventService.calculateDiscountAmount()).isEqualTo(1000);
     }
 }

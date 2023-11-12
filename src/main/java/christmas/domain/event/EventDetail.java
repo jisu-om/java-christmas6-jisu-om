@@ -1,11 +1,13 @@
 package christmas.domain.event;
 
+import christmas.constants.DiscountConstants;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 import static christmas.constants.DateConstants.*;
@@ -20,44 +22,52 @@ public enum EventDetail {
                     .boxed()
                     .toList(),
             10_000,
-            (orders, date) -> BASE_DISCOUNT + calculatePassedDays(date) * CHRISTMAS_RATE),
+            orders -> true,
+            (date, orders) -> BASE_DISCOUNT + calculatePassedDays(date) * CHRISTMAS_RATE),
     WEEKDAYS(
             "평일 할인",
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .filter(i -> i % 7 >= 3 || i % 7 == 0).boxed()
                     .toList(),
             10_000,
-            (orders, date) -> orders.countOrderItemByCategory(DESSERT) * DAILY_RATE),
+            orders -> orders.existsOrderItemByCategory(DESSERT),
+            (date, orders) -> orders.countOrderItemByCategory(DESSERT) * DAILY_RATE),
     WEEKENDS(
             "주말 할인",
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .filter(i -> i % 7 == 1 || i % 7 == 2).boxed()
                     .toList(),
             10_000,
-            (orders, date) -> orders.countOrderItemByCategory(MAIN) * DAILY_RATE),
+            orders -> orders.existsOrderItemByCategory(MAIN),
+            (date, orders) -> orders.countOrderItemByCategory(MAIN) * DAILY_RATE),
     SPECIAL(
             "특별 할인",
             List.of(3, 10, 17, 24, 25, 31),
             10_000,
-            (orders, date) -> BASE_DISCOUNT),
+            orders -> true,
+            (date, orders) -> BASE_DISCOUNT),
     GIVE_AWAY(
             "증정 이벤트",
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .boxed()
                     .toList(),
             120_000,
-            (orders, date) -> GIVE_AWAY_PRICE);
+            orders -> true,
+            (date, orders) -> NO_DISCOUNT);
 
     private final String eventName;
     private final List<Integer> dateCondition;
     private final long priceCondition;
-    private final BiFunction<Orders, VisitingDate, Long> discountCalculator;
+    private final Function<Orders, Boolean> itemCondition;
+    private final BiFunction<VisitingDate, Orders, Long> discountCalculator;
 
     EventDetail(String eventName, List<Integer> dateCondition, long priceCondition,
-                BiFunction<Orders, VisitingDate, Long> discountCalculator) {
+                Function<Orders, Boolean> itemCondition,
+                BiFunction<VisitingDate, Orders, Long> discountCalculator) {
         this.eventName = eventName;
         this.dateCondition = dateCondition;
         this.priceCondition = priceCondition;
+        this.itemCondition = itemCondition;
         this.discountCalculator = discountCalculator;
     }
 
@@ -65,14 +75,23 @@ public enum EventDetail {
         return date.getDate() - EVENT_START;
     }
 
-    public static List<EventDetail> findByDateAndPriceCondition(VisitingDate date, long originalPrice) {
+    public static List<EventDetail> findByCondition(VisitingDate date, Orders orders) {
         return Arrays.stream(EventDetail.values())
                 .filter(condition -> condition.dateCondition.contains(date.getDate()))
-                .filter(condition -> originalPrice >= condition.priceCondition)
+                .filter(condition -> orders.calculateOriginalTotalPrice() >= condition.priceCondition)
+                .filter(condition -> condition.itemCondition.apply(orders))
                 .toList();
     }
 
-    public long calculateDiscountAmount(Orders orders, VisitingDate date) {
-        return discountCalculator.apply(orders, date);
+    public static long getGiveAwayPrice() {
+        return GIVE_AWAY_PRICE;
+    }
+
+    public long calculateDiscountAmount(VisitingDate date, Orders orders) {
+        return discountCalculator.apply(date, orders);
+    }
+
+    public String getEventName() {
+        return eventName;
     }
 }
