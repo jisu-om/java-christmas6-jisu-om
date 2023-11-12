@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.visitingDate;
 
 import static christmas.constants.DateConstants.EVENT_END;
 import static christmas.constants.DateConstants.EVENT_START;

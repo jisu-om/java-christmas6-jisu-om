@@ -1,12 +1,12 @@
 package christmas.validationUtils;
 
-import christmas.domain.OrderItem;
+import christmas.domain.orders.OrderItem;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static christmas.domain.MenuCategory.DRINK;
+import static christmas.domain.menu.MenuCategory.DRINK;
 import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
 public class OrdersValidationUtils {

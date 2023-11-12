@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.event;
 
 public enum EventNames {
     CHRISTMAS_D_DAY("크리스마스 디데이 할인"),

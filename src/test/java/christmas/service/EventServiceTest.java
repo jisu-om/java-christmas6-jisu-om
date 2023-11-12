@@ -1,15 +1,12 @@
 package christmas.service;
 
-import christmas.domain.OrderItem;
-import christmas.domain.Orders;
-import christmas.domain.VisitingDate;
-import org.assertj.core.api.Assertions;
+import christmas.domain.orders.OrderItem;
+import christmas.domain.orders.Orders;
+import christmas.domain.visitingDate.VisitingDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 
 public class EventServiceTest {
     String VALID_APPETIZER = "양송이수프";

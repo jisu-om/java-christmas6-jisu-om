@@ -1,5 +1,6 @@
-package christmas.domain;
+package christmas.domain.orders;
 
+import christmas.domain.menu.MenuCategory;
 import christmas.validationUtils.OrdersValidationUtils;
 
 import java.util.List;

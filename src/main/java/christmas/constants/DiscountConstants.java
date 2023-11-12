@@ -1,6 +1,6 @@
 package christmas.constants;
 
-import christmas.domain.MenuItem;
+import christmas.domain.menu.MenuItem;
 
 public final class DiscountConstants {
     public static final long BASE_DISCOUNT = 1_000L;

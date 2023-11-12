@@ -1,9 +1,9 @@
 package christmas.service;
 
-import christmas.domain.MenuItem;
-import christmas.domain.OrderItem;
-import christmas.domain.Orders;
-import christmas.domain.VisitingDate;
+import christmas.domain.menu.MenuItem;
+import christmas.domain.orders.OrderItem;
+import christmas.domain.orders.Orders;
+import christmas.domain.visitingDate.VisitingDate;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

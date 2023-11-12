@@ -1,13 +1,14 @@
-package christmas.domain;
+package christmas.domain.event;
 
-import christmas.constants.DateConstants;
+import christmas.domain.orders.Orders;
+import christmas.domain.visitingDate.VisitingDate;
 
 import java.util.function.BiFunction;
 
 import static christmas.constants.DateConstants.*;
 import static christmas.constants.DiscountConstants.*;
-import static christmas.domain.MenuCategory.DESSERT;
-import static christmas.domain.MenuCategory.MAIN;
+import static christmas.domain.menu.MenuCategory.DESSERT;
+import static christmas.domain.menu.MenuCategory.MAIN;
 
 public enum DiscountAmount {
     CHRISTMAS_D_DAY((orders, date) -> BASE_DISCOUNT + calculatePassedDays(date) * CHRISTMAS_RATE),
