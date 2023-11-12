@@ -1,2 +1,4 @@
-package christmas.controller;public class VisitingDateInputHandler {
+package christmas.controller;
+
+public class VisitingDateInputHandler {
 }

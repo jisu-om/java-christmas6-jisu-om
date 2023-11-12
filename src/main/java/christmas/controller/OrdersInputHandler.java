@@ -1,2 +1,4 @@
-package christmas.controller;public class OrdersInputHandler {
+package christmas.controller;
+
+public class OrdersInputHandler {
 }

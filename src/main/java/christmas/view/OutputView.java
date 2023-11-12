@@ -1,2 +1,13 @@
-package christmas.view;public class OutputView {
+package christmas.view;
+
+public class OutputView {
+    private static final OutputView instance = new OutputView();
+
+    private OutputView() {
+    }
+    public static OutputView getInstance() {
+        return instance;
+    }
+
+
 }
