@@ -27,7 +27,7 @@ public class ChristmasController {
 
     public void run() {
         initializeInputHandlers();
-
+        outputView.printStart();
         //TODO readVisitingDate() : visitingDateInputHandler 를 통해 VisitingDate 생성 (예외 발생 시 다시 받기)
         //TODO readOrders() : ordersInputHandler 를 통해 Orders 생성 (예외 발생 시 다시 받기)
         VisitingDate date = visitingDateInputHandler.createVisitingDate();
@@ -54,5 +54,6 @@ public class ChristmasController {
 
     private void initializeInputHandlers() {
         //TODO VisitingDateInputHandler, OrdersInputHandler 생성
+        visitingDateInputHandler = VisitingDateInputHandler.of(inputView);
     }
 }
