@@ -1,5 +1,6 @@
 package christmas.validationUtils;
 
+import christmas.domain.menu.MenuItem;
 import christmas.domain.orders.OrderItem;
 
 import java.util.List;
@@ -7,17 +8,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static christmas.domain.menu.MenuCategory.DRINK;
-import static christmas.exception.ErrorMessage.INVALID_ORDER;
+import static christmas.exception.ErrorMessage.INVALID_ORDERS;
 
 public class OrdersValidationUtils {
     private static final int MAXIMUM_ORDER_TOTAL_QUANTITY = 20;
 
     public static void validateDuplicates(List<OrderItem> orders) {
-        Set<String> uniqueOrders = orders.stream()
-                .map(item -> item.provideMenuItem().name())
+        Set<MenuItem> uniqueOrders = orders.stream()
+                .map(OrderItem::provideMenuItem)
                 .collect(Collectors.toSet());
         if (orders.size() != uniqueOrders.size()) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 
@@ -26,7 +27,7 @@ public class OrdersValidationUtils {
                 .map(item -> item.provideMenuItem().getCategory())
                 .filter(category -> !category.equals(DRINK))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDERS.getMessage()));
     }
 
     public static void validateTotalQuantity(List<OrderItem> orders) {
@@ -35,7 +36,7 @@ public class OrdersValidationUtils {
                 .sum();
 
         if (totalQuantity > MAXIMUM_ORDER_TOTAL_QUANTITY) {
-            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
         }
     }
 }

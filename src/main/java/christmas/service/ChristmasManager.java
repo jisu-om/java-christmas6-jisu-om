@@ -16,11 +16,12 @@ public class ChristmasManager {
     }
 
     public ResultDto createResultDto() {
-        MatchingEvents matchingEvents = MatchingEvents.of(date, orders);
-        return ResultDto.of(matchingEvents, orders);
+//        MatchingEvents matchingEvents = MatchingEvents.of(date, orders);
+//        return ResultDto.of(matchingEvents, orders);
+        return null;
     }
 
-    private String provideBadgeName(long totalBenefitAmount) {
-        return BadgeGenerator.findBadgeName(totalBenefitAmount);
+    private String provideBadgeName(MatchingEvents events) {
+        return BadgeGenerator.findBadgeName(events);
     }
 }

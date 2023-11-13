@@ -1,11 +1,11 @@
 package christmas.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.dto.OrderItemDto;
 import christmas.service.ChristmasManager;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.ResultDto;
-import christmas.dto.OrdersDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -37,8 +37,8 @@ public class ChristmasController {
         //TODO visitingDate, orders 로 ChristmasManager 생성
         christmasManager = ChristmasManager.of(date, orders);
 
-        //TODO Orders 를 바탕으로 OrdersDto 생성해서 outputView 에 전달 (주문 메뉴 출력)
-        OrdersDto ordersDto = OrdersDto.of(orders);
+        //TODO Orders 를 바탕으로 OrderItemDto 생성해서 outputView 에 전달 (주문 메뉴 출력)
+        OrderItemDto orderItemDto = OrderItemDto.of(orders);
 
 
         //TODO christmasManager 에게 할인전 총주문금액, 혜택내역, 할인금액, 총혜택금액, 할인후 예상결제금액보, 배지정보 계산 후
@@ -54,6 +54,7 @@ public class ChristmasController {
 
     private void initializeInputHandlers() {
         //TODO VisitingDateInputHandler, OrdersInputHandler 생성
-        visitingDateInputHandler = VisitingDateInputHandler.of(inputView);
+        visitingDateInputHandler = VisitingDateInputHandler.of(inputView, outputView);
+        ordersInputHandler = OrdersInputHandler.of(inputView, outputView);
     }
 }
