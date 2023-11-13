@@ -27,6 +27,10 @@ public class OrderItem {
         return menuItem.getCategory();
     }
 
+    public long calculateItemOriginalPrice() {
+        return menuItem.getPrice() * quantity;
+    }
+
     public MenuItem provideMenuItem() {
         return menuItem;
     }
@@ -37,9 +41,5 @@ public class OrderItem {
 
     public int provideQuantity() {
         return quantity;
-    }
-
-    public long provideItemOriginalPrice() {
-        return menuItem.getPrice() * quantity;
     }
 }

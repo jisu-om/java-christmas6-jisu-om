@@ -38,7 +38,7 @@ public class Orders {
 
     public long calculateOriginalTotalAmount() {
         return orderItems.stream()
-                .mapToLong(OrderItem::provideItemOriginalPrice)
+                .mapToLong(OrderItem::calculateItemOriginalPrice)
                 .sum();
     }
 
