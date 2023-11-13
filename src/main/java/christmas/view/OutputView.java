@@ -24,6 +24,7 @@ public class OutputView {
     private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
     private static final String DISCOUNTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
+    private static final String BADGE_TITLE = "<12월 이벤트 배지>";
 
     private OutputView() {
     }
@@ -110,9 +111,14 @@ public class OutputView {
         System.out.println(message);
     }
 
-    private static void printDefaultWhenAmountIsZero(long amount) {
+    private void printDefaultWhenAmountIsZero(long amount) {
         if (amount == 0) {
             printDefault();
         }
+    }
+
+    public void printBadge(String badgeName) {
+        System.out.println(BADGE_TITLE);
+        System.out.println(badgeName);
     }
 }

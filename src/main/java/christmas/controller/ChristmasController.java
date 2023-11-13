@@ -6,6 +6,7 @@ import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
+import christmas.service.BadgeGenerator;
 import christmas.service.ChristmasManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -55,7 +56,7 @@ public class ChristmasController {
         outputView.printMatchingEvents(matchingEventsDto);
         outputView.printTotalBenefitAmount(matchingEvents.calculateTotalBenefitAmount());
         outputView.printDiscountedTotalAmount(orders.calculateOriginalTotalAmount() - matchingEvents.calculateTotalDiscountAmount());
-
+        outputView.printBadge(BadgeGenerator.findBadgeName(matchingEvents));
 
         Console.close();
     }
