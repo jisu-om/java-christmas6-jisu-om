@@ -34,10 +34,6 @@ public enum MenuItem {
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDERS.getMessage()));
     }
 
-    public MenuCategory findByCategory(MenuItem item) {
-        return item.category;
-    }
-
     public MenuCategory getCategory() {
         return category;
     }

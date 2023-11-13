@@ -3,7 +3,6 @@ package christmas.domain.badge;
 import java.util.Arrays;
 
 public enum BadgeCondition {
-    //TODO 문자열 -> 상수로 변환 필요 ??
     STAR("별", 5_000L, 10_000L),
     TREE("트리", 10_000L, 20_000L),
     SANTA("산타", 20_000L, Long.MAX_VALUE),
@@ -21,7 +20,8 @@ public enum BadgeCondition {
 
     public static String findBadgeNameByCondition(long totalBenefitAmount) {
         return Arrays.stream(BadgeCondition.values())
-                .filter(badge -> totalBenefitAmount >= badge.getMinCondition() && totalBenefitAmount < badge.getMaxCondition())
+                .filter(badge ->
+                        totalBenefitAmount >= badge.getMinCondition() && totalBenefitAmount < badge.getMaxCondition())
                 .map(BadgeCondition::getBadgeName)
                 .findFirst()
                 .orElse(NONE.getBadgeName());

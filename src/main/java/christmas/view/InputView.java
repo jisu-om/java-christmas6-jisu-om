@@ -19,7 +19,6 @@ public class InputView {
     private static final int MENU_NAME_INDEX = 0;
     private static final int QUANTITY_INDEX = 1;
 
-
     private InputView() {
     }
 
