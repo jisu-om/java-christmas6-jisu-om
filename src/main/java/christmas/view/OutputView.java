@@ -4,7 +4,6 @@ import christmas.dto.EventDetailDto;
 import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import static christmas.view.OutputViewMessageConstants.*;
@@ -24,12 +23,11 @@ public class OutputView {
     }
 
     public void printStart() {
-        System.out.println(OutputViewMessageConstants.START_MESSAGE);
+        System.out.println(START_MESSAGE);
     }
 
     public void printResultStart(int date) {
-        String message = String.format(RESULT_SRART_FORMAT, date);
-        System.out.println(message);
+        System.out.printf((RESULT_SRART_FORMAT) + "%n", date);
         printBlank();
     }
 
@@ -54,37 +52,30 @@ public class OutputView {
         printBadge(dto.getBadgeName());
     }
 
-    private void printOriginalTotalAmount(long originalTotalAmount) {
+    private void printOriginalTotalAmount(long amount) {
         System.out.println(ORIGINAL_TOTAL_AMOUNT_TITLE);
-        String amount = formatAmount(originalTotalAmount);
-        System.out.println(String.format(TOTAL_AMOUNT_FORMAT, amount));
+        System.out.printf((TOTAL_AMOUNT_FORMAT) + "%n", amount);
         printBlank();
-    }
-
-    private String formatAmount(long amount) {
-        DecimalFormat df = new DecimalFormat("###,###,###,###");  //TODO "###,###,###,###" 상수 처리
-        return df.format(amount);
     }
 
     private void printGiveAway(boolean containsGiveAway) {
         System.out.println(GIVE_AWAY_TITLE);
         if (containsGiveAway) {
-            System.out.println(GIVE_AWAY_FORMAT);
-            printBlank();
+            printMessage(GIVE_AWAY_FORMAT);
             return;
         }
-        printDefault();
+        printMessage(DEFAULT);
     }
 
-    private void printDefault() {
-        System.out.println(DEFAULT);
+    private void printMessage(String message) {
+        System.out.println(message);
         printBlank();
     }
 
     private void printMatchingEvents(List<EventDetailDto> events) {
         System.out.println(MATCHING_EVENTS_TITLE);
         if (events.isEmpty()) {
-            printDefault();
+            printMessage(DEFAULT);
             return;
         }
         events.forEach(this::printEventDetail);
@@ -92,40 +83,22 @@ public class OutputView {
     }
 
     private void printEventDetail(EventDetailDto event) {
-        String formattedAmount = formatAmount(event.getBenefitAmount());
-        String message = String.format(MATCHING_EVENT_FORMAT, event.getEventName(), formattedAmount);
-        System.out.println(message);
+        System.out.printf((MATCHING_EVENT_FORMAT) + "%n", event.getEventName(), event.getBenefitAmount());
     }
 
-    private void printTotalBenefitAmount(long totalBenefitAmount) {
+    private void printTotalBenefitAmount(long amount) {
         System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
-        if (totalBenefitAmount == 0) {
-            printTotalBenefitAmountZero();
+        if (amount == 0) {
+            printMessage(TOTAL_BENEFIT_AMOUNT_DEFAULT_MESSAGE);
             return;
         }
-        String amount = formatAmount(totalBenefitAmount);
-        String message = String.format(TOTAL_BENEFIT_AMOUNT_FORMAT, amount);
-        System.out.println(message);
+        System.out.printf((TOTAL_BENEFIT_AMOUNT_FORMAT) + "%n", amount);
         printBlank();
     }
 
-    private void printTotalBenefitAmountZero() {
-        System.out.println(NO_TOTAL_BENEFIT_AMOUNT_MESSAGE);
-        printBlank();
-    }
-
-    private void printDefaultWhenAmountIsZero(long amount) {
-        if (amount == 0) {
-            printDefault();
-        }
-    }
-
-    private void printExpectedTotalAmount(long discountedTotalAmount) {
+    private void printExpectedTotalAmount(long amount) {
         System.out.println(EXPECTED_TOTAL_AMOUNT_TITLE);
-        printDefaultWhenAmountIsZero(discountedTotalAmount);
-        String amount = formatAmount(discountedTotalAmount);
-        String message = String.format(TOTAL_AMOUNT_FORMAT, amount);
-        System.out.println(message);
+        System.out.printf((TOTAL_AMOUNT_FORMAT) + "%n", amount);
         printBlank();
     }
 
