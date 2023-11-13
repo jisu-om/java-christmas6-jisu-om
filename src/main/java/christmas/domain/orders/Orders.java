@@ -23,11 +23,11 @@ public class Orders {
         OrdersValidationUtils.validateTotalQuantity(orders);
     }
 
-    public long countOrderItemByCategory(MenuCategory comparingCategory) {
+    public int countOrderItemByCategory(MenuCategory comparingCategory) {
         return orderItems.stream()
-                .map(OrderItem::convertToCategory)
-                .filter(category -> category.equals(comparingCategory))
-                .count();
+                .filter(item -> item.convertToCategory().equals(comparingCategory))
+                .mapToInt(OrderItem::provideQuantity)
+                .sum();
     }
 
     public boolean existsOrderItemByCategory(MenuCategory comparingCategory) {
