@@ -15,13 +15,13 @@ import static christmas.domain.menu.MenuCategory.DESSERT;
 import static christmas.domain.menu.MenuCategory.MAIN;
 
 public enum EventDetail {
-    //TODO 모든 숫자들 상수 처리, 날짜 조건 규칙 생성
+    //TODO 날짜 조건 규칙 생성
     CHRISTMAS_D_DAY(
             "크리스마스 디데이 할인",
             IntStream.rangeClosed(EVENT_START, CHRISTMAS_EVENT_END)
                     .boxed()
                     .toList(),
-            10_000,
+            BASE_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> BASE_DISCOUNT + calculatePassedDays(date) * CHRISTMAS_RATE),
     WEEKDAYS(
@@ -29,7 +29,7 @@ public enum EventDetail {
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .filter(i -> i % 7 >= 3 || i % 7 == 0).boxed()
                     .toList(),
-            10_000,
+            BASE_PRICE_CONDITION,
             orders -> orders.existsOrderItemByCategory(DESSERT),
             (date, orders) -> orders.countOrderItemByCategory(DESSERT) * DAILY_RATE),
     WEEKENDS(
@@ -37,13 +37,13 @@ public enum EventDetail {
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .filter(i -> i % 7 == 1 || i % 7 == 2).boxed()
                     .toList(),
-            10_000,
+            BASE_PRICE_CONDITION,
             orders -> orders.existsOrderItemByCategory(MAIN),
             (date, orders) -> orders.countOrderItemByCategory(MAIN) * DAILY_RATE),
     SPECIAL(
             "특별 할인",
             List.of(3, 10, 17, 24, 25, 31),
-            10_000,
+            BASE_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> BASE_DISCOUNT),
     GIVE_AWAY(
@@ -51,7 +51,7 @@ public enum EventDetail {
             IntStream.rangeClosed(EVENT_START, EVENT_END)
                     .boxed()
                     .toList(),
-            120_000,
+            GIVE_AWAY_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> GIVE_AWAY_PRICE);
 
