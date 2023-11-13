@@ -2,6 +2,7 @@ package christmas.view;
 
 import christmas.constants.DiscountConstants;
 import christmas.dto.EventDetailDto;
+import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
 
 import java.text.DecimalFormat;
@@ -32,12 +33,12 @@ public class OutputView {
         return instance;
     }
 
-    public void printStart() {
-        System.out.println(START_MESSAGE);
-    }
-
     public void printError(String message) {
         System.out.println(message);
+    }
+
+    public void printStart() {
+        System.out.println(START_MESSAGE);
     }
 
     public void printResultStart(int date) {
@@ -46,7 +47,7 @@ public class OutputView {
         printBlank();
     }
 
-    public void printBlank() {
+    private void printBlank() {
         System.out.println();
     }
 
@@ -58,7 +59,16 @@ public class OutputView {
         printBlank();
     }
 
-    public void printOriginalTotalAmount(long originalTotalAmount) {
+    public void printResult(MatchingEventsDto dto) {
+        printOriginalTotalAmount(dto.getOriginalTotalAmount());
+        printGiveAway(dto.isContainsGiveAway());
+        printMatchingEvents(dto.getEvents());
+        printTotalBenefitAmount(dto.getTotalBenefitAmount());
+        printExpectedTotalAmount(dto.getExpectedTotalAmount());
+        printBadge(dto.getBadgeName());
+    }
+
+    private void printOriginalTotalAmount(long originalTotalAmount) {
         System.out.println(ORIGINAL_TOTAL_AMOUNT_TITLE);
         String amount = formatAmount(originalTotalAmount);
         System.out.println(String.format(TOTAL_AMOUNT_FORMAT, amount));
@@ -70,7 +80,7 @@ public class OutputView {
         return df.format(amount);
     }
 
-    public void printGiveAway(boolean containsGiveAway) {
+    private void printGiveAway(boolean containsGiveAway) {
         System.out.println(GIVE_AWAY_TITLE);
         if (containsGiveAway) {
             System.out.println(GIVE_AWAY_FORMAT);
@@ -85,7 +95,7 @@ public class OutputView {
         printBlank();
     }
 
-    public void printMatchingEvents(List<EventDetailDto> events) {
+    private void printMatchingEvents(List<EventDetailDto> events) {
         System.out.println(MATCHING_EVENTS_TITLE);
         if (events.isEmpty()) {
             printDefault();
@@ -101,7 +111,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printTotalBenefitAmount(long totalBenefitAmount) {
+    private void printTotalBenefitAmount(long totalBenefitAmount) {
         System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
         printDefaultWhenAmountIsZero(totalBenefitAmount);
         String amount = formatAmount(totalBenefitAmount);
@@ -110,7 +120,7 @@ public class OutputView {
         printBlank();
     }
 
-    public void printExpectedTotalAmount(long discountedTotalAmount) {
+    private void printExpectedTotalAmount(long discountedTotalAmount) {
         System.out.println(EXPECTED_TOTAL_AMOUNT_TITLE);
         printDefaultWhenAmountIsZero(discountedTotalAmount);
         String amount = formatAmount(discountedTotalAmount);
@@ -125,7 +135,7 @@ public class OutputView {
         }
     }
 
-    public void printBadge(String badgeName) {
+    private void printBadge(String badgeName) {
         System.out.println(BADGE_TITLE);
         System.out.println(badgeName);
         printBlank();

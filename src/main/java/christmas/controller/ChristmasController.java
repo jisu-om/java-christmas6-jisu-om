@@ -51,11 +51,6 @@ public class ChristmasController {
 
     private void printResult() {
         MatchingEventsDto matchingEventsDto = christmasManager.createMatchingEventsDto();
-        outputView.printOriginalTotalAmount(matchingEventsDto.getOriginalTotalAmount());
-        outputView.printGiveAway(matchingEventsDto.isContainsGiveAway());
-        outputView.printMatchingEvents(matchingEventsDto.getEvents());
-        outputView.printTotalBenefitAmount(matchingEventsDto.getTotalBenefitAmount());
-        outputView.printExpectedTotalAmount(matchingEventsDto.getExpectedTotalAmount());
-        outputView.printBadge(matchingEventsDto.getBadgeName());
+        outputView.printResult(matchingEventsDto);
     }
 }
