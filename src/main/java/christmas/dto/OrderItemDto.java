@@ -15,6 +15,12 @@ public class OrderItemDto {
         return new OrderItemDto(menuName, quantity);
     }
 
+    public static OrderItemDto of(OrderItem orderItem) {
+        String menuName = orderItem.provideMenuName();
+        int quantity = orderItem.provideQuantity();
+        return new OrderItemDto(menuName, quantity);
+    }
+
     public OrderItem toOrderItem() {
         return OrderItem.of(menuName, quantity);
     }

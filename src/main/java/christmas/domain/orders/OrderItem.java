@@ -31,6 +31,10 @@ public class OrderItem {
         return menuItem;
     }
 
+    public String provideMenuName() {
+        return menuItem.name();
+    }
+
     public int provideQuantity() {
         return quantity;
     }
