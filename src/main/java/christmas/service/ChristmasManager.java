@@ -3,7 +3,8 @@ package christmas.service;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
-import christmas.dto.ResultDto;
+import christmas.dto.MatchingEventsDto;
+import christmas.dto.OrdersDto;
 
 public class ChristmasManager {
     private final MatchingEvents events;
@@ -16,13 +17,11 @@ public class ChristmasManager {
         return new ChristmasManager(date, orders);
     }
 
-    public ResultDto createResultDto() {
-//        MatchingEvents matchingEvents = MatchingEvents.of(date, orders);
-//        return ResultDto.of(matchingEvents, orders);
-        return null;
+    public OrdersDto createOrdersDto() {
+        return OrdersDto.from(events.provideOrders());
     }
 
-    private String provideBadgeName() {
-        return BadgeGenerator.findBadgeName(events);
+    public MatchingEventsDto createMatchingEventsDto() {
+        return MatchingEventsDto.of(events);
     }
 }

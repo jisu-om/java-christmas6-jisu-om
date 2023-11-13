@@ -23,7 +23,7 @@ public class OutputView {
     private static final String MATCHING_EVENT_FORMAT = "%s: -%s원";
     private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
-    private static final String DISCOUNTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
+    private static final String EXPECTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
     private static final String BADGE_TITLE = "<12월 이벤트 배지>";
 
     private OutputView() {
@@ -79,9 +79,8 @@ public class OutputView {
         System.out.println(DEFAULT);
     }
 
-    public void printMatchingEvents(MatchingEventsDto matchingEvents) {
+    public void printMatchingEvents(List<EventDetailDto> events) {
         System.out.println(MATCHING_EVENTS_TITLE);
-        List<EventDetailDto> events = matchingEvents.getEvents();
         if (events.isEmpty()) {
             printDefault();
             return;
@@ -103,8 +102,8 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printDiscountedTotalAmount(long discountedTotalAmount) {
-        System.out.println(DISCOUNTED_TOTAL_AMOUNT_TITLE);
+    public void printExpectedTotalAmount(long discountedTotalAmount) {
+        System.out.println(EXPECTED_TOTAL_AMOUNT_TITLE);
         printDefaultWhenAmountIsZero(discountedTotalAmount);
         String amount = formatAmount(discountedTotalAmount);
         String message = String.format(TOTAL_AMOUNT_FORMAT, amount);
