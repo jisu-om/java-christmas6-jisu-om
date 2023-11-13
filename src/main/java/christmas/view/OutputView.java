@@ -2,7 +2,6 @@ package christmas.view;
 
 import christmas.constants.DiscountConstants;
 import christmas.dto.EventDetailDto;
-import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
 
 import java.text.DecimalFormat;
@@ -11,7 +10,7 @@ import java.util.List;
 public class OutputView {
     private static final OutputView instance = new OutputView();
     private static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
-    private static final String RESULT_SRART_MESSAGE = "12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    private static final String RESULT_SRART_FORMAT = "12월 $d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String MENU_TITLE = "<주문 메뉴>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String ORIGINAL_TOTAL_AMOUNT_TITLE = "<할인 전 총주문 금액>";
@@ -41,8 +40,9 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printResultStart() {
-        System.out.println(RESULT_SRART_MESSAGE);
+    public void printResultStart(int date) {
+        String message = String.format(RESULT_SRART_FORMAT, date);
+        System.out.println(message);
         printBlank();
     }
 
@@ -52,13 +52,17 @@ public class OutputView {
 
     public void printMenu(OrdersDto ordersDto) {
         System.out.println(MENU_TITLE);
-        ordersDto.getOrderItemDtos().forEach(item -> System.out.printf((MENU_FORMAT) + "%n", item.getMenuName(), item.getQuantity()));
+        ordersDto.getOrderItemDtos()
+                .forEach(item ->
+                        System.out.printf((MENU_FORMAT) + "%n", item.getMenuName(), item.getQuantity()));
+        printBlank();
     }
 
     public void printOriginalTotalAmount(long originalTotalAmount) {
         System.out.println(ORIGINAL_TOTAL_AMOUNT_TITLE);
         String amount = formatAmount(originalTotalAmount);
         System.out.println(String.format(TOTAL_AMOUNT_FORMAT, amount));
+        printBlank();
     }
 
     private String formatAmount(long amount) {
@@ -70,13 +74,15 @@ public class OutputView {
         System.out.println(GIVE_AWAY_TITLE);
         if (containsGiveAway) {
             System.out.println(GIVE_AWAY_FORMAT);
+            printBlank();
             return;
         }
         printDefault();
     }
 
-    private static void printDefault() {
+    private void printDefault() {
         System.out.println(DEFAULT);
+        printBlank();
     }
 
     public void printMatchingEvents(List<EventDetailDto> events) {
@@ -86,6 +92,7 @@ public class OutputView {
             return;
         }
         events.forEach(this::printEventDetail);
+        printBlank();
     }
 
     private void printEventDetail(EventDetailDto event) {
@@ -100,6 +107,7 @@ public class OutputView {
         String amount = formatAmount(totalBenefitAmount);
         String message = String.format(TOTAL_BENEFIT_AMOUNT_FORMAT, amount);
         System.out.println(message);
+        printBlank();
     }
 
     public void printExpectedTotalAmount(long discountedTotalAmount) {
@@ -108,6 +116,7 @@ public class OutputView {
         String amount = formatAmount(discountedTotalAmount);
         String message = String.format(TOTAL_AMOUNT_FORMAT, amount);
         System.out.println(message);
+        printBlank();
     }
 
     private void printDefaultWhenAmountIsZero(long amount) {
@@ -119,5 +128,6 @@ public class OutputView {
     public void printBadge(String badgeName) {
         System.out.println(BADGE_TITLE);
         System.out.println(badgeName);
+        printBlank();
     }
 }

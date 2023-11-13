@@ -1,11 +1,9 @@
 package christmas.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
-import christmas.service.BadgeGenerator;
 import christmas.service.ChristmasManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -31,7 +29,6 @@ public class ChristmasController {
         initializeChristmasManager();
         printOrders();
         printResult();
-        Console.close();
     }
 
     private void initializeInputHandlers() {
@@ -44,10 +41,10 @@ public class ChristmasController {
         VisitingDate date = visitingDateInputHandler.createVisitingDate();
         Orders orders = ordersInputHandler.createOrders();
         christmasManager = ChristmasManager.of(date, orders);
+        outputView.printResultStart(date.getDate());
     }
 
     private void printOrders() {
-        outputView.printResultStart();
         OrdersDto ordersDto = christmasManager.createOrdersDto();
         outputView.printMenu(ordersDto);
     }

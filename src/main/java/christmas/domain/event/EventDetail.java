@@ -1,6 +1,5 @@
 package christmas.domain.event;
 
-import christmas.constants.DiscountConstants;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 
