@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.constants.DiscountConstants;
+import christmas.domain.event.EventDetail;
 import christmas.dto.OrdersDto;
 
 import java.text.DecimalFormat;
@@ -12,6 +14,9 @@ public class OutputView {
     private static final String MENU_FORMAT = "%s %d개";
     private static final String ORIGINAL_TOTAL_AMOUNT_MESSAGE = "<할인 전 총주문 금액>";
     private static final String ORIGINAL_TOTAL_AMOUNT_FORMAT = "%s원";
+    private static final String GIVE_AWAY_MESSAGE = "<증정 메뉴>";
+    private static final String GIVE_AWAY_FORMAT = String.format("%s 1개", DiscountConstants.GIVE_AWAY_ITEM);
+    private static final String DEFAULT = "없음";
 
     private OutputView() {
     }
@@ -51,5 +56,18 @@ public class OutputView {
     private static void printFormattedAmount(long amount) {
         DecimalFormat df = new DecimalFormat("###,###,###,###");
         System.out.printf((ORIGINAL_TOTAL_AMOUNT_FORMAT) + "%n", df.format(amount));
+    }
+
+    public void printGiveAway(boolean containsGiveAway) {
+        System.out.println(GIVE_AWAY_MESSAGE);
+        if (containsGiveAway) {
+            System.out.println(GIVE_AWAY_FORMAT);
+            return;
+        }
+        printDefault();
+    }
+
+    private static void printDefault() {
+        System.out.println(DEFAULT);
     }
 }

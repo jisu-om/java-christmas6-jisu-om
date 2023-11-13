@@ -15,6 +15,7 @@ import static christmas.domain.menu.MenuCategory.DESSERT;
 import static christmas.domain.menu.MenuCategory.MAIN;
 
 public enum EventDetail {
+    //TODO 모든 숫자들 상수 처리, 날짜 조건 규칙 생성
     CHRISTMAS_D_DAY(
             "크리스마스 디데이 할인",
             IntStream.rangeClosed(EVENT_START, CHRISTMAS_EVENT_END)

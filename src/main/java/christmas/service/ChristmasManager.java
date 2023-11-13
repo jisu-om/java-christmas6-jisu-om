@@ -6,9 +6,10 @@ import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.ResultDto;
 
 public class ChristmasManager {
+    private final MatchingEvents events;
 
     private ChristmasManager(VisitingDate date, Orders orders) {
-
+        events = MatchingEvents.of(date, orders);
     }
 
     public static ChristmasManager of(VisitingDate date, Orders orders) {
@@ -21,7 +22,7 @@ public class ChristmasManager {
         return null;
     }
 
-    private String provideBadgeName(MatchingEvents events) {
+    private String provideBadgeName() {
         return BadgeGenerator.findBadgeName(events);
     }
 }
