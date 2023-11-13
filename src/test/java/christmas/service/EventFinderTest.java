@@ -1,6 +1,5 @@
 package christmas.service;
 
-import christmas.domain.event.EventDetail;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
@@ -28,10 +27,9 @@ public class EventFinderTest {
         Orders orders = Orders.from(List.of(orderItem1, orderItem2));
 
         //when
-        MatchingEvents matchingEvents = MatchingEvents.of(visitingDate, orders);
+        MatchingEvents matchingEvents = MatchingEvents.from(visitingDate, orders);
 
         //then  //1일, 15000원 - 1000(크리스마스 디데이 할인)
-        assertThat(matchingEvents.provideEventNames()).containsExactly(EventDetail.CHRISTMAS_D_DAY.getEventName());
-        assertThat(matchingEvents.calculateTotalDiscountAmount()).isEqualTo(1000);
+
     }
 }

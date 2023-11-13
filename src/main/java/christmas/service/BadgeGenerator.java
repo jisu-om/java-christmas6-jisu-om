@@ -4,8 +4,7 @@ import christmas.domain.badge.BadgeCondition;
 import christmas.domain.event.MatchingEvents;
 
 public class BadgeGenerator {
-    public static String findBadgeName(MatchingEvents events) {
-        long totalBenefitAmount = events.calculateTotalBenefitAmount();
+    public static String findBadgeName(long totalBenefitAmount) {
         return BadgeCondition.findBadgeNameByCondition(totalBenefitAmount);
     }
 }
