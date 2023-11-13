@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.constants.DiscountConstants;
 import christmas.dto.EventDetailDto;
 import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrdersDto;
@@ -8,24 +7,10 @@ import christmas.dto.OrdersDto;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import static christmas.view.OutputViewMessageConstants.*;
+
 public class OutputView {
     private static final OutputView instance = new OutputView();
-    private static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
-    private static final String RESULT_SRART_FORMAT = "12월 $d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
-    private static final String MENU_TITLE = "<주문 메뉴>";
-    private static final String MENU_FORMAT = "%s %d개";
-    private static final String ORIGINAL_TOTAL_AMOUNT_TITLE = "<할인 전 총주문 금액>";
-    private static final String TOTAL_AMOUNT_FORMAT = "%s원";
-    private static final String GIVE_AWAY_TITLE = "<증정 메뉴>";
-    private static final String GIVE_AWAY_FORMAT = String.format("%s 1개", DiscountConstants.GIVE_AWAY_ITEM);
-    private static final String DEFAULT = "없음";
-    private static final String MATCHING_EVENTS_TITLE = "<혜택 내역>";
-    private static final String MATCHING_EVENT_FORMAT = "%s: -%s원";
-    private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
-    private static final String NO_TOTAL_BENEFIT_AMOUNT_MESSAGE = "0원";
-    private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
-    private static final String EXPECTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
-    private static final String BADGE_TITLE = "<12월 이벤트 배지>";
 
     private OutputView() {
     }
@@ -39,7 +24,7 @@ public class OutputView {
     }
 
     public void printStart() {
-        System.out.println(START_MESSAGE);
+        System.out.println(OutputViewMessageConstants.START_MESSAGE);
     }
 
     public void printResultStart(int date) {
