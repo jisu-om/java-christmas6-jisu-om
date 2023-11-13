@@ -22,6 +22,7 @@ public class OutputView {
     private static final String MATCHING_EVENTS_TITLE = "<혜택 내역>";
     private static final String MATCHING_EVENT_FORMAT = "%s: -%s원";
     private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
+    private static final String NO_TOTAL_BENEFIT_AMOUNT_MESSAGE = "0원";
     private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
     private static final String EXPECTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
     private static final String BADGE_TITLE = "<12월 이벤트 배지>";
@@ -113,11 +114,25 @@ public class OutputView {
 
     private void printTotalBenefitAmount(long totalBenefitAmount) {
         System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
-        printDefaultWhenAmountIsZero(totalBenefitAmount);
+        if (totalBenefitAmount == 0) {
+            printTotalBenefitAmountZero();
+            return;
+        }
         String amount = formatAmount(totalBenefitAmount);
         String message = String.format(TOTAL_BENEFIT_AMOUNT_FORMAT, amount);
         System.out.println(message);
         printBlank();
+    }
+
+    private void printTotalBenefitAmountZero() {
+        System.out.println(NO_TOTAL_BENEFIT_AMOUNT_MESSAGE);
+        printBlank();
+    }
+
+    private void printDefaultWhenAmountIsZero(long amount) {
+        if (amount == 0) {
+            printDefault();
+        }
     }
 
     private void printExpectedTotalAmount(long discountedTotalAmount) {
@@ -127,12 +142,6 @@ public class OutputView {
         String message = String.format(TOTAL_AMOUNT_FORMAT, amount);
         System.out.println(message);
         printBlank();
-    }
-
-    private void printDefaultWhenAmountIsZero(long amount) {
-        if (amount == 0) {
-            printDefault();
-        }
     }
 
     private void printBadge(String badgeName) {
