@@ -1,12 +1,5 @@
 package christmas.dto;
 
-import christmas.service.BenefitCalculator;
-import christmas.domain.event.EventDetail;
-import christmas.domain.event.MatchingEvents;
-import christmas.domain.orders.Orders;
-
-import java.util.List;
-
 public class ResultDto {
 //    private final MatchingEvents matchingEvents;
 //    private final long originalTotalAmount;

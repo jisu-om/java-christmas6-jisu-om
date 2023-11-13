@@ -6,6 +6,7 @@ public class OutputView {
 
     private OutputView() {
     }
+
     public static OutputView getInstance() {
         return instance;
     }
