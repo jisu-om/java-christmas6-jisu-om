@@ -45,6 +45,7 @@ public class ChristmasController {
         //TODO christmasManager 에게 할인전 총주문금액, 혜택내역, 할인금액, 총혜택금액, 할인후 예상결제금액보, 배지정보 계산 후
         // ResultDto 를 생성하라고 요청
         // (따로따로 객체 생성? ex. PricingInfo - 이들이 객체로서 하는 로직이 있는 경우에 생성)
+        outputView.printOriginalTotalAmount(orders.calculateOriginalTotalAmount());
         ResultDto resultDto = christmasManager.createResultDto();
 
         //TODO resultDto 를 outputView 에 넘겨줌
