@@ -32,9 +32,6 @@ public class EventFinderTest {
 
         //then  //1일, 15000원 - 1000(크리스마스 디데이 할인)
         assertThat(matchingEvents.provideEventNames()).containsExactly(EventDetail.CHRISTMAS_D_DAY.getEventName());
-        assertThat(BenefitCalculator.calculateTotalDiscountAmount(matchingEvents)).isEqualTo(1000);
-        assertThat(BenefitCalculator.calculateTotalDiscountAmount(matchingEvents))
-                .isEqualTo(BenefitCalculator.calculateTotalBenefitAmount(matchingEvents));
-
+        assertThat(matchingEvents.calculateTotalDiscountAmount()).isEqualTo(1000);
     }
 }

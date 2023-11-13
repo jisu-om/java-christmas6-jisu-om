@@ -21,6 +21,8 @@ public class OutputView {
     private static final String DEFAULT = "없음";
     private static final String MATCHING_EVENTS_TITLE = "<혜택 내역>";
     private static final String MATCHING_EVENT_FORMAT = "%s: -%s원";
+    private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
+    private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
 
     private OutputView() {
     }
@@ -87,7 +89,17 @@ public class OutputView {
 
     private void printEventDetail(EventDetailDto event) {
         String formattedAmount = formatAmount(event.getBenefitAmount());
-        String eventMessage = String.format(MATCHING_EVENT_FORMAT, event.getEventName(), formattedAmount);
-        System.out.println(eventMessage);
+        String message = String.format(MATCHING_EVENT_FORMAT, event.getEventName(), formattedAmount);
+        System.out.println(message);
+    }
+
+    public void printTotalBenefitAmount(long totalBenefitAmount) {
+        System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
+        if (totalBenefitAmount == 0) {
+            printDefault();
+        }
+        String amount = formatAmount(totalBenefitAmount);
+        String message = String.format(TOTAL_BENEFIT_AMOUNT_FORMAT, amount);
+        System.out.println(message);
     }
 }

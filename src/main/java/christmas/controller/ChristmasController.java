@@ -5,9 +5,7 @@ import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.MatchingEventsDto;
-import christmas.dto.OrderItemDto;
 import christmas.dto.OrdersDto;
-import christmas.dto.ResultDto;
 import christmas.service.ChristmasManager;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -55,7 +53,7 @@ public class ChristmasController {
         outputView.printGiveAway(matchingEvents.containsGiveAway());
         MatchingEventsDto matchingEventsDto = MatchingEventsDto.of(matchingEvents);
         outputView.printMatchingEvents(matchingEventsDto);
-
+        outputView.printTotalBenefitAmount(matchingEvents.calculateTotalBenefitAmount());
 
 
 

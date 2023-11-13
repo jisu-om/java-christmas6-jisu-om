@@ -5,7 +5,6 @@ import christmas.domain.visitingDate.VisitingDate;
 import christmas.service.EventFinder;
 
 import java.util.List;
-import java.util.Map;
 
 public class MatchingEvents {
     private final VisitingDate date;  //TODO date, orders 필드를 가지는게 괜찮은지 ~ MatchingEvents의 역할을 생각
@@ -26,6 +25,19 @@ public class MatchingEvents {
     public boolean containsGiveAway() {
         return events.stream()
                 .anyMatch(event -> event.equals(EventDetail.GIVE_AWAY));
+    }
+
+    public long calculateTotalBenefitAmount() {
+        return events.stream()
+                .mapToLong(event -> event.calculateBenefitAmount(date, orders))
+                .sum();
+    }
+
+    public long calculateTotalDiscountAmount() {
+        if (containsGiveAway()) {
+            return calculateTotalBenefitAmount() - EventDetail.getGiveAwayPrice();
+        }
+        return calculateTotalBenefitAmount();
     }
 
     public List<EventDetail> provideMatchingEvents() {
