@@ -15,7 +15,7 @@ public class OutputView {
     private static final String MENU_TITLE = "<주문 메뉴>";
     private static final String MENU_FORMAT = "%s %d개";
     private static final String ORIGINAL_TOTAL_AMOUNT_TITLE = "<할인 전 총주문 금액>";
-    private static final String ORIGINAL_TOTAL_AMOUNT_FORMAT = "%s원";
+    private static final String TOTAL_AMOUNT_FORMAT = "%s원";
     private static final String GIVE_AWAY_TITLE = "<증정 메뉴>";
     private static final String GIVE_AWAY_FORMAT = String.format("%s 1개", DiscountConstants.GIVE_AWAY_ITEM);
     private static final String DEFAULT = "없음";
@@ -23,6 +23,7 @@ public class OutputView {
     private static final String MATCHING_EVENT_FORMAT = "%s: -%s원";
     private static final String TOTAL_BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String TOTAL_BENEFIT_AMOUNT_FORMAT = "-%s원";
+    private static final String DISCOUNTED_TOTAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
 
     private OutputView() {
     }
@@ -56,11 +57,11 @@ public class OutputView {
     public void printOriginalTotalAmount(long originalTotalAmount) {
         System.out.println(ORIGINAL_TOTAL_AMOUNT_TITLE);
         String amount = formatAmount(originalTotalAmount);
-        System.out.println(String.format(ORIGINAL_TOTAL_AMOUNT_FORMAT, amount));
+        System.out.println(String.format(TOTAL_AMOUNT_FORMAT, amount));
     }
 
     private String formatAmount(long amount) {
-        DecimalFormat df = new DecimalFormat("###,###,###,###");
+        DecimalFormat df = new DecimalFormat("###,###,###,###");  //TODO "###,###,###,###" 상수 처리
         return df.format(amount);
     }
 
@@ -95,11 +96,23 @@ public class OutputView {
 
     public void printTotalBenefitAmount(long totalBenefitAmount) {
         System.out.println(TOTAL_BENEFIT_AMOUNT_TITLE);
-        if (totalBenefitAmount == 0) {
-            printDefault();
-        }
+        printDefaultWhenAmountIsZero(totalBenefitAmount);
         String amount = formatAmount(totalBenefitAmount);
         String message = String.format(TOTAL_BENEFIT_AMOUNT_FORMAT, amount);
         System.out.println(message);
+    }
+
+    public void printDiscountedTotalAmount(long discountedTotalAmount) {
+        System.out.println(DISCOUNTED_TOTAL_AMOUNT_TITLE);
+        printDefaultWhenAmountIsZero(discountedTotalAmount);
+        String amount = formatAmount(discountedTotalAmount);
+        String message = String.format(TOTAL_AMOUNT_FORMAT, amount);
+        System.out.println(message);
+    }
+
+    private static void printDefaultWhenAmountIsZero(long amount) {
+        if (amount == 0) {
+            printDefault();
+        }
     }
 }

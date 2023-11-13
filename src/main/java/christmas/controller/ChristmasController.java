@@ -54,7 +54,7 @@ public class ChristmasController {
         MatchingEventsDto matchingEventsDto = MatchingEventsDto.of(matchingEvents);
         outputView.printMatchingEvents(matchingEventsDto);
         outputView.printTotalBenefitAmount(matchingEvents.calculateTotalBenefitAmount());
-
+        outputView.printDiscountedTotalAmount(orders.calculateOriginalTotalAmount() - matchingEvents.calculateTotalDiscountAmount());
 
 
         Console.close();
