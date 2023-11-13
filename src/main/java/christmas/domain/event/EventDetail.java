@@ -1,5 +1,6 @@
 package christmas.domain.event;
 
+import christmas.constants.DiscountConstants;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 
@@ -53,22 +54,22 @@ public enum EventDetail {
                     .toList(),
             120_000,
             orders -> true,
-            (date, orders) -> NO_DISCOUNT);
+            (date, orders) -> GIVE_AWAY_PRICE);
 
     private final String eventName;
     private final List<Integer> dateCondition;
     private final long priceCondition;
     private final Function<Orders, Boolean> itemCondition;
-    private final BiFunction<VisitingDate, Orders, Long> discountCalculator;
+    private final BiFunction<VisitingDate, Orders, Long> benefitCalculator;
 
     EventDetail(String eventName, List<Integer> dateCondition, long priceCondition,
                 Function<Orders, Boolean> itemCondition,
-                BiFunction<VisitingDate, Orders, Long> discountCalculator) {
+                BiFunction<VisitingDate, Orders, Long> benefitCalculator) {
         this.eventName = eventName;
         this.dateCondition = dateCondition;
         this.priceCondition = priceCondition;
         this.itemCondition = itemCondition;
-        this.discountCalculator = discountCalculator;
+        this.benefitCalculator = benefitCalculator;
     }
 
     private static long calculatePassedDays(VisitingDate date) {
@@ -87,8 +88,8 @@ public enum EventDetail {
         return GIVE_AWAY_PRICE;
     }
 
-    public long calculateDiscountAmount(VisitingDate date, Orders orders) {
-        return discountCalculator.apply(date, orders);
+    public long calculateBenefitAmount(VisitingDate date, Orders orders) {
+        return benefitCalculator.apply(date, orders);
     }
 
     public String getEventName() {

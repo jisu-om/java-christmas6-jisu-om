@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
+import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrderItemDto;
 import christmas.dto.OrdersDto;
 import christmas.dto.ResultDto;
@@ -52,7 +53,8 @@ public class ChristmasController {
 
         outputView.printOriginalTotalAmount(orders.calculateOriginalTotalAmount());
         outputView.printGiveAway(matchingEvents.containsGiveAway());
-
+        MatchingEventsDto matchingEventsDto = MatchingEventsDto.of(matchingEvents);
+        outputView.printMatchingEvents(matchingEventsDto);
 
 
 
