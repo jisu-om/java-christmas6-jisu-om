@@ -6,7 +6,7 @@ import christmas.domain.event.EventFinder;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
-import christmas.dto.EventDetailDto;
+import christmas.domain.event.MatchingEvent;
 import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 
@@ -31,12 +31,11 @@ public class ChristmasManager {
 
     public ResultDto createResultDto() {
         MatchingEvents events = createMatchingEvents();
-        List<EventDetailDto> eventDetailDtos = createEventDetailDtos(events);
-        long totalBenefitAmount = BenefitCalculator.calculateTotalBenefitAmount(date, orders, events);
-        long totalDiscountAmount = BenefitCalculator.calculateTotalDiscountAmount(date, orders, events);
+        long totalBenefitAmount = events.calculateTotalBenefitAmount();
+        long totalDiscountAmount = events.calculateTotalDiscountAmount();
 
         return new ResultDto.Builder()
-                .events(eventDetailDtos)
+                .events(events.provideMatchingEvents())
                 .originalTotalAmount(provideOriginalTotalAmount())
                 .containsGiveAway(events.containsGiveAway())
                 .totalBenefitAmount(totalBenefitAmount)
@@ -47,13 +46,6 @@ public class ChristmasManager {
 
     private MatchingEvents createMatchingEvents() {
         return EventFinder.findMatchingEvents(date, orders);
-    }
-
-    private List<EventDetailDto> createEventDetailDtos(MatchingEvents events) {
-        return events.provideMatchingEvents().stream()
-                .map(event ->
-                        EventDetailDto.of(event.getEventName(), event.calculateBenefitAmount(date, orders)))
-                .toList();
     }
 
     private long provideOriginalTotalAmount() {

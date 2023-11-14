@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class EventFinderTest {
+public class MatchingEventFinderTest {
     String VALID_APPETIZER = "양송이수프";
     String VALID_DRINK = "제로콜라";
     int VALID_QUANTITY1 = 1;

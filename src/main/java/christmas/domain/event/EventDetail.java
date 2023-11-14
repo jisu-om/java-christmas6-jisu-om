@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.IntStream;
 
 import static christmas.constants.DateConstants.*;
 import static christmas.constants.DiscountConstants.*;
@@ -67,11 +66,12 @@ public enum EventDetail {
         return date.getDate() - EVENT_START;
     }
 
-    public static List<EventDetail> findByCondition(VisitingDate date, Orders orders) {
+    public static List<MatchingEvent> findByCondition(VisitingDate date, Orders orders) {
         return Arrays.stream(EventDetail.values())
                 .filter(condition -> condition.dateCondition.test(date.getDate()))
                 .filter(condition -> orders.calculateOriginalTotalAmount() >= condition.priceCondition)
                 .filter(condition -> condition.itemCondition.apply(orders))
+                .map(eventDetail -> MatchingEvent.of(eventDetail, eventDetail.calculateBenefitAmount(date, orders)))
                 .toList();
     }
 

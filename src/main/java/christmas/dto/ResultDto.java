@@ -1,11 +1,13 @@
 package christmas.dto;
 
+import christmas.domain.event.MatchingEvent;
+
 import java.util.List;
 
 import static christmas.exception.ErrorMessage.INVALID_CREATION;
 
 public class ResultDto {
-    private final List<EventDetailDto> events;
+    private final List<MatchingEvent> events;
     private final long originalTotalAmount;
     private final boolean containsGiveAway;
     private final long totalBenefitAmount;
@@ -22,14 +24,14 @@ public class ResultDto {
     }
 
     public static class Builder {
-        private List<EventDetailDto> events;
+        private List<MatchingEvent> events;
         private Long originalTotalAmount;
         private Boolean containsGiveAway;
         private Long totalBenefitAmount;
         private Long totalDiscountAmount;
         private String badgeName;
 
-        public Builder events(List<EventDetailDto> events) {
+        public Builder events(List<MatchingEvent> events) {
             this.events = events;
             return this;
         }
@@ -68,7 +70,7 @@ public class ResultDto {
         }
     }
 
-    public List<EventDetailDto> getEventDetails() {
+    public List<MatchingEvent> getEventDetails() {
         return events;
     }
 

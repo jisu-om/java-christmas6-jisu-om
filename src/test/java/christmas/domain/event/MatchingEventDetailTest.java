@@ -14,7 +14,7 @@ import static christmas.constants.DiscountConstants.GIVE_AWAY_PRICE;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class EventDetailTest {
+class MatchingEventDetailTest {
     EventDetail christmas = EventDetail.CHRISTMAS_D_DAY;
     EventDetail weekdays = EventDetail.WEEKDAYS;
     EventDetail weekends = EventDetail.WEEKENDS;

@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.dto.EventDetailDto;
+import christmas.domain.event.MatchingEvent;
 import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 
@@ -72,7 +72,7 @@ public class OutputView {
         printBlank();
     }
 
-    private void printMatchingEvents(List<EventDetailDto> events) {
+    private void printMatchingEvents(List<MatchingEvent> events) {
         System.out.println(MATCHING_EVENTS_TITLE);
         if (events.isEmpty()) {
             printMessage(DEFAULT);
@@ -82,7 +82,7 @@ public class OutputView {
         printBlank();
     }
 
-    private void printEventDetail(EventDetailDto event) {
+    private void printEventDetail(MatchingEvent event) {
         System.out.printf((MATCHING_EVENT_FORMAT) + "%n", event.getEventName(), event.getBenefitAmount());
     }
 
