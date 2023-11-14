@@ -4,7 +4,7 @@ import java.util.List;
 
 import static christmas.exception.ErrorMessage.INVALID_CREATION;
 
-public class MatchingEventsDto {
+public class ResultDto {
     private final List<EventDetailDto> events;
     private final long originalTotalAmount;
     private final boolean containsGiveAway;
@@ -12,7 +12,7 @@ public class MatchingEventsDto {
     private final long totalDiscountAmount;
     private final String badgeName;
 
-    private MatchingEventsDto(Builder builder) {
+    private ResultDto(Builder builder) {
         this.events = builder.events;
         this.originalTotalAmount = builder.originalTotalAmount;
         this.containsGiveAway = builder.containsGiveAway;
@@ -59,16 +59,16 @@ public class MatchingEventsDto {
             return this;
         }
 
-        public MatchingEventsDto build() {
+        public ResultDto build() {
             if (events == null || originalTotalAmount == null || containsGiveAway == null
                     || totalBenefitAmount == null || totalDiscountAmount == null || badgeName == null) {
                 throw new IllegalStateException(INVALID_CREATION.getMessage());
             }
-            return new MatchingEventsDto(this);
+            return new ResultDto(this);
         }
     }
 
-    public List<EventDetailDto> getEvents() {
+    public List<EventDetailDto> getEventDetails() {
         return events;
     }
 

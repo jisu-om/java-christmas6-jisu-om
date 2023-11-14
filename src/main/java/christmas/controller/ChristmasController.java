@@ -2,7 +2,7 @@ package christmas.controller;
 
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
-import christmas.dto.MatchingEventsDto;
+import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 import christmas.service.ChristmasManager;
 import christmas.view.InputView;
@@ -50,7 +50,7 @@ public class ChristmasController {
     }
 
     private void printResult() {
-        MatchingEventsDto matchingEventsDto = christmasManager.createMatchingEventsDto();
-        outputView.printResult(matchingEventsDto);
+        ResultDto resultDto = christmasManager.createResultDto();
+        outputView.printResult(resultDto);
     }
 }

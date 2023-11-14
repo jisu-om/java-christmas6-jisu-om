@@ -7,7 +7,7 @@ import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.EventDetailDto;
-import christmas.dto.MatchingEventsDto;
+import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 
 import java.util.List;
@@ -29,13 +29,13 @@ public class ChristmasManager {
         return OrdersDto.from(orders);
     }
 
-    public MatchingEventsDto createMatchingEventsDto() {
+    public ResultDto createResultDto() {
         MatchingEvents events = createMatchingEvents();
         List<EventDetailDto> eventDetailDtos = createEventDetailDtos(events);
         long totalBenefitAmount = BenefitCalculator.calculateTotalBenefitAmount(date, orders, events);
         long totalDiscountAmount = BenefitCalculator.calculateTotalDiscountAmount(date, orders, events);
 
-        return new MatchingEventsDto.Builder()
+        return new ResultDto.Builder()
                 .events(eventDetailDtos)
                 .originalTotalAmount(provideOriginalTotalAmount())
                 .containsGiveAway(events.containsGiveAway())

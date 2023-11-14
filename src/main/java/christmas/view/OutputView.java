@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.dto.EventDetailDto;
-import christmas.dto.MatchingEventsDto;
+import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 
 import java.util.List;
@@ -43,10 +43,10 @@ public class OutputView {
         printBlank();
     }
 
-    public void printResult(MatchingEventsDto dto) {
+    public void printResult(ResultDto dto) {
         printOriginalTotalAmount(dto.getOriginalTotalAmount());
         printGiveAway(dto.isContainsGiveAway());
-        printMatchingEvents(dto.getEvents());
+        printMatchingEvents(dto.getEventDetails());
         printTotalBenefitAmount(dto.getTotalBenefitAmount());
         printExpectedTotalAmount(dto.getExpectedTotalAmount());
         printBadge(dto.getBadgeName());
