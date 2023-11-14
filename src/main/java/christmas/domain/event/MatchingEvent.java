@@ -21,7 +21,7 @@ public class MatchingEvent {
         return eventDetail.getEventName();
     }
 
-    public long provideBenefitAmount() {
+    public long getBenefitAmount() {
         return benefitAmount;
     }
 }

@@ -1,12 +1,10 @@
 package christmas.service;
 
-import christmas.domain.badge.BadgeGenerator;
-import christmas.domain.event.BenefitCalculator;
-import christmas.domain.event.EventFinder;
+import christmas.domain.event.EventDetail;
+import christmas.domain.event.MatchingEvent;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
-import christmas.domain.event.MatchingEvent;
 import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
 
@@ -31,24 +29,11 @@ public class ChristmasManager {
 
     public ResultDto createResultDto() {
         MatchingEvents events = createMatchingEvents();
-        long totalBenefitAmount = events.calculateTotalBenefitAmount();
-        long totalDiscountAmount = events.calculateTotalDiscountAmount();
-
-        return new ResultDto.Builder()
-                .events(events.provideMatchingEvents())
-                .originalTotalAmount(provideOriginalTotalAmount())
-                .containsGiveAway(events.containsGiveAway())
-                .totalBenefitAmount(totalBenefitAmount)
-                .totalDiscountAmount(totalDiscountAmount)
-                .badgeName(BadgeGenerator.findBadgeName(totalBenefitAmount))
-                .build();
+        return ResultDto.of(events, orders);
     }
 
     private MatchingEvents createMatchingEvents() {
-        return EventFinder.findMatchingEvents(date, orders);
-    }
-
-    private long provideOriginalTotalAmount() {
-        return orders.calculateOriginalTotalAmount();
+        List<MatchingEvent> eventDetails = EventDetail.findByCondition(date, orders);
+        return MatchingEvents.from(eventDetails);
     }
 }

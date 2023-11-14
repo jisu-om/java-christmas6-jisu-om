@@ -75,7 +75,7 @@ public enum EventDetail {
                 .toList();
     }
 
-    public long calculateBenefitAmount(VisitingDate date, Orders orders) {
+    private long calculateBenefitAmount(VisitingDate date, Orders orders) {
         return benefitCalculator.apply(date, orders);
     }
 

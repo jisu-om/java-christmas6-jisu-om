@@ -1,76 +1,35 @@
 package christmas.dto;
 
 import christmas.domain.event.MatchingEvent;
+import christmas.domain.event.MatchingEvents;
+import christmas.domain.orders.Orders;
 
 import java.util.List;
 
-import static christmas.exception.ErrorMessage.INVALID_CREATION;
-
 public class ResultDto {
-    private final List<MatchingEvent> events;
+    private final List<MatchingEventDto> events;
     private final long originalTotalAmount;
     private final boolean containsGiveAway;
     private final long totalBenefitAmount;
     private final long totalDiscountAmount;
     private final String badgeName;
 
-    private ResultDto(Builder builder) {
-        this.events = builder.events;
-        this.originalTotalAmount = builder.originalTotalAmount;
-        this.containsGiveAway = builder.containsGiveAway;
-        this.totalBenefitAmount = builder.totalBenefitAmount;
-        this.totalDiscountAmount = builder.totalDiscountAmount;
-        this.badgeName = builder.badgeName;
+    private ResultDto(MatchingEvents events, Orders orders) {
+        this.events = events.provideMatchingEvents().stream()
+                .map(MatchingEventDto::of)
+                .toList();
+        this.originalTotalAmount = orders.calculateOriginalTotalAmount();
+        this.containsGiveAway = events.containsGiveAway();
+        this.totalBenefitAmount = events.calculateTotalBenefitAmount();
+        this.totalDiscountAmount = events.calculateTotalDiscountAmount();
+        this.badgeName = events.findBadgeName();
     }
 
-    public static class Builder {
-        private List<MatchingEvent> events;
-        private Long originalTotalAmount;
-        private Boolean containsGiveAway;
-        private Long totalBenefitAmount;
-        private Long totalDiscountAmount;
-        private String badgeName;
-
-        public Builder events(List<MatchingEvent> events) {
-            this.events = events;
-            return this;
-        }
-
-        public Builder originalTotalAmount(long originalTotalAmount) {
-            this.originalTotalAmount = originalTotalAmount;
-            return this;
-        }
-
-        public Builder containsGiveAway(boolean containsGiveAway) {
-            this.containsGiveAway = containsGiveAway;
-            return this;
-        }
-
-        public Builder totalBenefitAmount(long totalBenefitAmount) {
-            this.totalBenefitAmount = totalBenefitAmount;
-            return this;
-        }
-
-        public Builder totalDiscountAmount(long totalDiscountAmount) {
-            this.totalDiscountAmount = totalDiscountAmount;
-            return this;
-        }
-
-        public Builder badgeName(String badgeName) {
-            this.badgeName = badgeName;
-            return this;
-        }
-
-        public ResultDto build() {
-            if (events == null || originalTotalAmount == null || containsGiveAway == null
-                    || totalBenefitAmount == null || totalDiscountAmount == null || badgeName == null) {
-                throw new IllegalStateException(INVALID_CREATION.getMessage());
-            }
-            return new ResultDto(this);
-        }
+    public static ResultDto of(MatchingEvents events, Orders orders) {
+        return new ResultDto(events, orders);
     }
 
-    public List<MatchingEvent> getEventDetails() {
+    public List<MatchingEventDto> getEventDetails() {
         return events;
     }
 

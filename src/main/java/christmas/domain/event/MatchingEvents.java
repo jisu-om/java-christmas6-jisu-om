@@ -1,7 +1,6 @@
 package christmas.domain.event;
 
-import christmas.domain.orders.Orders;
-import christmas.domain.visitingDate.VisitingDate;
+import christmas.domain.badge.BadgeCondition;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class MatchingEvents {
 
     public long calculateTotalBenefitAmount() {
         return events.stream()
-                .mapToLong(MatchingEvent::provideBenefitAmount)
+                .mapToLong(MatchingEvent::getBenefitAmount)
                 .sum();
     }
 
@@ -33,6 +32,10 @@ public class MatchingEvents {
 
     public boolean containsGiveAway() {
         return events.stream().anyMatch(MatchingEvent::isGiveAway);
+    }
+
+    public String findBadgeName() {
+        return BadgeCondition.findBadgeNameByCondition(calculateTotalBenefitAmount());
     }
 
     public List<MatchingEvent> provideMatchingEvents() {
