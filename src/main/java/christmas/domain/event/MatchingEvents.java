@@ -13,8 +13,8 @@ public class MatchingEvents {
         this.events = events;
     }
 
-    public static MatchingEvents from(List<MatchingEvent> eventDetails) {
-        return new MatchingEvents(eventDetails);
+    public static MatchingEvents from(List<MatchingEvent> events) {
+        return new MatchingEvents(events);
     }
 
     public long calculateTotalBenefitAmount() {

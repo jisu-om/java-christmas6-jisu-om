@@ -9,7 +9,7 @@ public class MatchingEvent {
         this.benefitAmount = benefitAmount;
     }
 
-    public static MatchingEvent of(EventDetail eventDetail, long benefitAmount) {
+    protected static MatchingEvent of(EventDetail eventDetail, long benefitAmount) {
         return new MatchingEvent(eventDetail, benefitAmount);
     }
 
