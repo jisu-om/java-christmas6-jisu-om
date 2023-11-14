@@ -1,17 +1,9 @@
-package christmas.service;
+package christmas.domain.badge;
 
-import christmas.domain.badge.BadgeCondition;
-import christmas.domain.badge.BadgeGenerator;
-import christmas.domain.orders.OrderItem;
-import christmas.domain.orders.Orders;
-import christmas.domain.visitingDate.VisitingDate;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class BadgeGeneratorTest {
     @DisplayName("혜택금액에 따른 이벤트 배지 생성")
