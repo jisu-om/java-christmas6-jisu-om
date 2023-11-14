@@ -1,11 +1,5 @@
 package christmas.dto;
 
-import christmas.domain.event.EventDetail;
-import christmas.domain.event.MatchingEvents;
-import christmas.domain.orders.Orders;
-import christmas.domain.visitingDate.VisitingDate;
-import christmas.service.BadgeGenerator;
-
 import java.util.List;
 
 import static christmas.exception.ErrorMessage.INVALID_CREATION;

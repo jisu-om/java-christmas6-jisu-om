@@ -1,4 +1,4 @@
-package christmas.service;
+package christmas.domain.event;
 
 import christmas.domain.event.EventDetail;
 import christmas.domain.event.MatchingEvents;

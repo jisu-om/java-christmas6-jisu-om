@@ -1,4 +1,4 @@
-package christmas.service;
+package christmas.domain.badge;
 
 import christmas.domain.badge.BadgeCondition;
 import christmas.domain.event.MatchingEvents;

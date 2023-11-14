@@ -1,5 +1,8 @@
 package christmas.service;
 
+import christmas.domain.badge.BadgeGenerator;
+import christmas.domain.event.BenefitCalculator;
+import christmas.domain.event.EventFinder;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
