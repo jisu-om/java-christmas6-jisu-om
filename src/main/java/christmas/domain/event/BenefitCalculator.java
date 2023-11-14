@@ -3,6 +3,8 @@ package christmas.domain.event;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 
+import static christmas.constants.DiscountConstants.GIVE_AWAY_PRICE;
+
 public class BenefitCalculator {
     private final VisitingDate date;
     private final Orders orders;
@@ -26,7 +28,7 @@ public class BenefitCalculator {
 
     public long calculateTotalDiscountAmount() {
         if (events.containsGiveAway()) {
-            return calculateTotalBenefitAmount() - EventDetail.getGiveAwayPrice();
+            return calculateTotalBenefitAmount() - GIVE_AWAY_PRICE;
         }
         return calculateTotalBenefitAmount();
     }

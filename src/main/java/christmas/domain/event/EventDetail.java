@@ -75,10 +75,6 @@ public enum EventDetail {
                 .toList();
     }
 
-    public static long getGiveAwayPrice() {
-        return GIVE_AWAY_PRICE;
-    }
-
     public long calculateBenefitAmount(VisitingDate date, Orders orders) {
         return benefitCalculator.apply(date, orders);
     }

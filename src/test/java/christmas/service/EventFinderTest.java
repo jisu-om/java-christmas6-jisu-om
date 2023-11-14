@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.domain.event.EventFinder;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
@@ -21,13 +22,13 @@ public class EventFinderTest {
     @Test
     void generate_events() {
         // given
-        VisitingDate visitingDate = VisitingDate.from(1);
+        VisitingDate date = VisitingDate.from(1);
         OrderItem orderItem1 = OrderItem.of(VALID_APPETIZER, VALID_QUANTITY2);
         OrderItem orderItem2 = OrderItem.of(VALID_DRINK, VALID_QUANTITY1);
         Orders orders = Orders.from(List.of(orderItem1, orderItem2));
 
         //when
-        MatchingEvents matchingEvents = MatchingEvents.from(visitingDate, orders);
+        MatchingEvents matchingEvents = EventFinder.findMatchingEvents(date, orders);
 
         //then  //1일, 15000원 - 1000(크리스마스 디데이 할인)
 
