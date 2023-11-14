@@ -13,8 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InputViewTest {
+    private final InputView inputView = InputView.getInstance();
     InputStream originalIn = System.in;
-    private InputView inputView = InputView.getInstance();
 
     @AfterEach
     void afterEach() {
