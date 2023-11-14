@@ -28,9 +28,9 @@ class BenefitCalculatorTest {
 
         Orders orders = Orders.from(List.of(appetizer, main1, main2, dessert, drink1, drink2));
         MatchingEvents matchingEvents = EventFinder.findMatchingEvents(date, orders);
-        BenefitCalculator benefitCalculator = BenefitCalculator.of(date, orders, matchingEvents);
 
         // when, then
-        assertThat(benefitCalculator.calculateTotalBenefitAmount()).isEqualTo(1000 + 2023 * 2 + GIVE_AWAY_PRICE);
+        assertThat(BenefitCalculator.calculateTotalBenefitAmount(date, orders, matchingEvents))
+                .isEqualTo(1000 + 2023 * 2 + GIVE_AWAY_PRICE);
     }
 }

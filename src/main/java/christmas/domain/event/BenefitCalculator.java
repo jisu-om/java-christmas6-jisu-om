@@ -6,30 +6,19 @@ import christmas.domain.visitingDate.VisitingDate;
 import static christmas.constants.DiscountConstants.GIVE_AWAY_PRICE;
 
 public class BenefitCalculator {
-    private final VisitingDate date;
-    private final Orders orders;
-    private final MatchingEvents events;
-
-    private BenefitCalculator(VisitingDate date, Orders orders, MatchingEvents events) {
-        this.date = date;
-        this.orders = orders;
-        this.events = events;
+    private BenefitCalculator() {
     }
 
-    public static BenefitCalculator of(VisitingDate date, Orders orders, MatchingEvents events) {
-        return new BenefitCalculator(date, orders, events);
-    }
-
-    public long calculateTotalBenefitAmount() {
+    public static long calculateTotalBenefitAmount(VisitingDate date, Orders orders, MatchingEvents events) {
         return events.provideMatchingEvents().stream()
                 .mapToLong(event -> event.calculateBenefitAmount(date, orders))
                 .sum();
     }
 
-    public long calculateTotalDiscountAmount() {
+    public static long calculateTotalDiscountAmount(VisitingDate date, Orders orders, MatchingEvents events) {
         if (events.containsGiveAway()) {
-            return calculateTotalBenefitAmount() - GIVE_AWAY_PRICE;
+            return calculateTotalBenefitAmount(date, orders, events) - GIVE_AWAY_PRICE;
         }
-        return calculateTotalBenefitAmount();
+        return calculateTotalBenefitAmount(date, orders, events);
     }
 }

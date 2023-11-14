@@ -32,10 +32,9 @@ public class ChristmasManager {
     }
 
     public MatchingEventsDto createMatchingEventsDto() {
-        BenefitCalculator calculator = initializeBenefitCalculator();
         List<EventDetailDto> eventDetailDtos = createEventDetailDtos();
-        long totalBenefitAmount = calculator.calculateTotalBenefitAmount();
-        long totalDiscountAmount = calculator.calculateTotalDiscountAmount();
+        long totalBenefitAmount = BenefitCalculator.calculateTotalBenefitAmount(date, orders, events);
+        long totalDiscountAmount = BenefitCalculator.calculateTotalDiscountAmount(date, orders, events);
 
         return new MatchingEventsDto.Builder()
                 .events(eventDetailDtos)
@@ -45,10 +44,6 @@ public class ChristmasManager {
                 .totalDiscountAmount(totalDiscountAmount)
                 .badgeName(BadgeGenerator.findBadgeName(totalBenefitAmount))
                 .build();
-    }
-
-    private BenefitCalculator initializeBenefitCalculator() {
-        return BenefitCalculator.of(date, orders, events);
     }
 
     private List<EventDetailDto> createEventDetailDtos() {
