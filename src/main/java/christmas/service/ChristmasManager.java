@@ -15,12 +15,10 @@ import java.util.List;
 public class ChristmasManager {
     private final VisitingDate date;
     private final Orders orders;
-    private final MatchingEvents events;
 
     private ChristmasManager(VisitingDate date, Orders orders) {
         this.date = date;
         this.orders = orders;
-        this.events = EventFinder.findMatchingEvents(date, orders);
     }
 
     public static ChristmasManager of(VisitingDate date, Orders orders) {
@@ -32,31 +30,33 @@ public class ChristmasManager {
     }
 
     public MatchingEventsDto createMatchingEventsDto() {
-        List<EventDetailDto> eventDetailDtos = createEventDetailDtos();
+        MatchingEvents events = createMatchingEvents();
+        List<EventDetailDto> eventDetailDtos = createEventDetailDtos(events);
         long totalBenefitAmount = BenefitCalculator.calculateTotalBenefitAmount(date, orders, events);
         long totalDiscountAmount = BenefitCalculator.calculateTotalDiscountAmount(date, orders, events);
 
         return new MatchingEventsDto.Builder()
                 .events(eventDetailDtos)
                 .originalTotalAmount(provideOriginalTotalAmount())
-                .containsGiveAway(isContainsGiveAway())
+                .containsGiveAway(events.containsGiveAway())
                 .totalBenefitAmount(totalBenefitAmount)
                 .totalDiscountAmount(totalDiscountAmount)
                 .badgeName(BadgeGenerator.findBadgeName(totalBenefitAmount))
                 .build();
     }
 
-    private List<EventDetailDto> createEventDetailDtos() {
+    private MatchingEvents createMatchingEvents() {
+        return EventFinder.findMatchingEvents(date, orders);
+    }
+
+    private List<EventDetailDto> createEventDetailDtos(MatchingEvents events) {
         return events.provideMatchingEvents().stream()
-                .map(event -> EventDetailDto.of(event.getEventName(), event.calculateBenefitAmount(date, orders)))
+                .map(event ->
+                        EventDetailDto.of(event.getEventName(), event.calculateBenefitAmount(date, orders)))
                 .toList();
     }
 
     private long provideOriginalTotalAmount() {
         return orders.calculateOriginalTotalAmount();
-    }
-
-    private boolean isContainsGiveAway() {
-        return events.containsGiveAway();
     }
 }
