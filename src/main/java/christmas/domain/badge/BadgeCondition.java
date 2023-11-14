@@ -18,13 +18,12 @@ public enum BadgeCondition {
         this.maxCondition = maxCondition;
     }
 
-    public static String findBadgeNameByCondition(long totalBenefitAmount) {
+    public static BadgeCondition findBadgeByCondition(long totalBenefitAmount) {
         return Arrays.stream(BadgeCondition.values())
                 .filter(badge ->
                         totalBenefitAmount >= badge.getMinCondition() && totalBenefitAmount < badge.getMaxCondition())
-                .map(BadgeCondition::getBadgeName)
                 .findFirst()
-                .orElse(NONE.getBadgeName());
+                .orElse(NONE);
     }
 
     public String getBadgeName() {

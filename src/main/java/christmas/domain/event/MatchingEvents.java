@@ -34,11 +34,15 @@ public class MatchingEvents {
         return events.stream().anyMatch(MatchingEvent::isGiveAway);
     }
 
-    public String findBadgeName() {
-        return BadgeCondition.findBadgeNameByCondition(calculateTotalBenefitAmount());
-    }
-
     public List<MatchingEvent> provideMatchingEvents() {
         return List.copyOf(events);
+    }
+
+    public String findBadgeName() {
+        return findBadge().getBadgeName();
+    }
+
+    private BadgeCondition findBadge() {
+        return BadgeCondition.findBadgeByCondition(calculateTotalBenefitAmount());
     }
 }
