@@ -19,6 +19,24 @@ public class OrdersTest {
     String DRINK2 = "샴페인";
     List<OrderItem> orderItems;
 
+    private static Stream<Arguments> orderItemsProvider() {
+        OrdersTest test = new OrdersTest();
+
+        OrderItem appetizer1 = OrderItem.of(test.APPETIZER, 1);
+        OrderItem appetizer2 = OrderItem.of(test.APPETIZER, 2);
+        OrderItem appetizer10 = OrderItem.of(test.APPETIZER, 10);
+        OrderItem drink1 = OrderItem.of(test.DRINK1, 1);
+        OrderItem drink2 = OrderItem.of(test.DRINK2, 1);
+        OrderItem main10 = OrderItem.of(test.MAIN, 10);
+
+        return Stream.of(
+                Arguments.of(List.of(appetizer1, appetizer2)),
+                Arguments.of(List.of(drink1)),
+                Arguments.of(List.of(drink1, drink2)),
+                Arguments.of(List.of(appetizer10, main10, drink1))
+        );
+    }
+
     @DisplayName("Orders 정상 생성")
     @Test
     void create() {
@@ -39,23 +57,5 @@ public class OrdersTest {
     void exception(List<OrderItem> orderItems) {
         assertThatThrownBy(() -> Orders.from(orderItems))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    private static Stream<Arguments> orderItemsProvider() {
-        OrdersTest test = new OrdersTest();
-
-        OrderItem appetizer1 = OrderItem.of(test.APPETIZER, 1);
-        OrderItem appetizer2 = OrderItem.of(test.APPETIZER, 2);
-        OrderItem appetizer10 = OrderItem.of(test.APPETIZER, 10);
-        OrderItem drink1 = OrderItem.of(test.DRINK1, 1);
-        OrderItem drink2 = OrderItem.of(test.DRINK2, 1);
-        OrderItem main10 = OrderItem.of(test.MAIN, 10);
-
-        return Stream.of(
-                Arguments.of(List.of(appetizer1, appetizer2)),
-                Arguments.of(List.of(drink1)),
-                Arguments.of(List.of(drink1, drink2)),
-                Arguments.of(List.of(appetizer10, main10, drink1))
-        );
     }
 }

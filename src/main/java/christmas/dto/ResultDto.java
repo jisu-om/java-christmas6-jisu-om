@@ -1,6 +1,5 @@
 package christmas.dto;
 
-import christmas.domain.event.MatchingEvent;
 import christmas.domain.event.MatchingEvents;
 import christmas.domain.orders.Orders;
 

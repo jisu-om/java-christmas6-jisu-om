@@ -1,12 +1,12 @@
 package christmas.domain.visitingDate;
 
-import christmas.domain.visitingDate.VisitingDate;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class VisitingDateTest {
     @DisplayName("1 이상 31 이하이면 방문 날짜 정상 생성된다.")

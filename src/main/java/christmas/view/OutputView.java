@@ -1,9 +1,8 @@
 package christmas.view;
 
-import christmas.domain.event.MatchingEvent;
 import christmas.dto.MatchingEventDto;
-import christmas.dto.ResultDto;
 import christmas.dto.OrdersDto;
+import christmas.dto.ResultDto;
 
 import java.util.List;
 
