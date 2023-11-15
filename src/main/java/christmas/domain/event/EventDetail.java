@@ -63,12 +63,12 @@ public enum EventDetail {
     }
 
     private static long calculatePassedDays(VisitingDate date) {
-        return date.getDate() - EVENT_START;
+        return date.provideDate() - EVENT_START;
     }
 
     public static List<MatchingEvent> findByCondition(VisitingDate date, Orders orders) {
         return Arrays.stream(EventDetail.values())
-                .filter(condition -> condition.dateCondition.test(date.getDate()))
+                .filter(condition -> condition.dateCondition.test(date.provideDate()))
                 .filter(condition -> orders.calculateOriginalTotalAmount() >= condition.priceCondition)
                 .filter(condition -> condition.itemCondition.apply(orders))
                 .map(eventDetail -> MatchingEvent.of(eventDetail, eventDetail.calculateBenefitAmount(date, orders)))

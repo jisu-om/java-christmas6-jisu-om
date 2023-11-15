@@ -22,7 +22,7 @@ public class VisitingDate {
         }
     }
 
-    public int getDate() {
+    public int provideDate() {
         return date;
     }
 }

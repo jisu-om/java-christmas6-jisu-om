@@ -41,7 +41,7 @@ public class ChristmasController {
         VisitingDate date = visitingDateInputHandler.createVisitingDate();
         Orders orders = ordersInputHandler.createOrders();
         christmasManager = ChristmasManager.of(date, orders);
-        outputView.printResultStart(date.getDate());
+        outputView.printResultStart(date.provideDate());
     }
 
     private void printOrders() {
