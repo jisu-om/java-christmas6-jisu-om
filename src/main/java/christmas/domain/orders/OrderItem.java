@@ -13,14 +13,14 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public static OrderItem of(String menu, int quantity) {
+    public static OrderItem of(String menuName, int quantity) {
         OrderItemValidationUtils.validatePositive(quantity);
-        MenuItem validMenuItem = convertToMenu(menu);
+        MenuItem validMenuItem = convertToMenu(menuName);
         return new OrderItem(validMenuItem, quantity);
     }
 
-    private static MenuItem convertToMenu(String menu) {
-        return MenuItem.findByName(menu);
+    private static MenuItem convertToMenu(String menuName) {
+        return MenuItem.findByName(menuName);
     }
 
     public MenuCategory convertToCategory() {
