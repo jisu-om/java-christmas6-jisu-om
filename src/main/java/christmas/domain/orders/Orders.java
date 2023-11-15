@@ -42,7 +42,7 @@ public class Orders {
                 .sum();
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public List<OrderItem> provideOrderItems() {
+        return List.copyOf(orderItems);
     }
 }

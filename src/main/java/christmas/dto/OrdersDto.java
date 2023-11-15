@@ -12,7 +12,7 @@ public class OrdersDto {
     }
 
     public static OrdersDto from(Orders orders) {
-        List<OrderItemDto> orderItemDtos = orders.getOrderItems().stream()
+        List<OrderItemDto> orderItemDtos = orders.provideOrderItems().stream()
                 .map(OrderItemDto::of)
                 .toList();
         return new OrdersDto(orderItemDtos);
