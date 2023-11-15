@@ -17,12 +17,6 @@ public class MatchingEvents {
         return new MatchingEvents(events);
     }
 
-    public long calculateTotalBenefitAmount() {
-        return events.stream()
-                .mapToLong(MatchingEvent::getBenefitAmount)
-                .sum();
-    }
-
     public long calculateTotalDiscountAmount() {
         if (containsGiveAway()) {
             return calculateTotalBenefitAmount() - GIVE_AWAY_PRICE;
@@ -32,6 +26,12 @@ public class MatchingEvents {
 
     public boolean containsGiveAway() {
         return events.stream().anyMatch(MatchingEvent::isGiveAway);
+    }
+
+    public long calculateTotalBenefitAmount() {
+        return events.stream()
+                .mapToLong(MatchingEvent::getBenefitAmount)
+                .sum();
     }
 
     public List<MatchingEvent> provideMatchingEvents() {
