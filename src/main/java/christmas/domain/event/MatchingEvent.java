@@ -19,11 +19,11 @@ public class MatchingEvent {
         return eventDetail == GIVE_AWAY;
     }
 
-    public String getEventName() {
+    public String provideEventName() {
         return eventDetail.getEventName();
     }
 
-    public long getBenefitAmount() {
+    public long provideBenefitAmount() {
         return benefitAmount;
     }
 }

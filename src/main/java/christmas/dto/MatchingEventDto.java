@@ -12,7 +12,7 @@ public class MatchingEventDto {
     }
 
     public static MatchingEventDto of(MatchingEvent event) {
-        return new MatchingEventDto(event.getEventName(), event.getBenefitAmount());
+        return new MatchingEventDto(event.provideEventName(), event.provideBenefitAmount());
     }
 
     public String getEventName() {

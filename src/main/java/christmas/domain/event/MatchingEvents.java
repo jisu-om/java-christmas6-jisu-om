@@ -30,7 +30,7 @@ public class MatchingEvents {
 
     public long calculateTotalBenefitAmount() {
         return events.stream()
-                .mapToLong(MatchingEvent::getBenefitAmount)
+                .mapToLong(MatchingEvent::provideBenefitAmount)
                 .sum();
     }
 
