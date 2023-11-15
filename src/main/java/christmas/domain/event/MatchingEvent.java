@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import static christmas.domain.event.EventDetail.*;
+
 public class MatchingEvent {
     private final EventDetail eventDetail;
     private final long benefitAmount;
@@ -14,7 +16,7 @@ public class MatchingEvent {
     }
 
     public boolean isGiveAway() {
-        return eventDetail == EventDetail.GIVE_AWAY;
+        return eventDetail == GIVE_AWAY;
     }
 
     public String getEventName() {
