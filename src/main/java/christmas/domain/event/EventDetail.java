@@ -11,8 +11,8 @@ import java.util.function.Predicate;
 
 import static christmas.constants.DateConstants.*;
 import static christmas.constants.DiscountConstants.*;
-import static christmas.domain.menu.MenuCategory.DESSERT;
-import static christmas.domain.menu.MenuCategory.MAIN;
+import static christmas.domain.orders.MenuCategory.DESSERT;
+import static christmas.domain.orders.MenuCategory.MAIN;
 
 public enum EventDetail {
     CHRISTMAS_D_DAY(

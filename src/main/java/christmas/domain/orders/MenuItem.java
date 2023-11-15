@@ -1,8 +1,8 @@
-package christmas.domain.menu;
+package christmas.domain.orders;
 
 import java.util.Arrays;
 
-import static christmas.domain.menu.MenuCategory.*;
+import static christmas.domain.orders.MenuCategory.*;
 import static christmas.exception.ErrorMessage.INVALID_ORDERS;
 
 public enum MenuItem {

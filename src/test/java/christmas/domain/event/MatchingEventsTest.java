@@ -2,7 +2,7 @@ package christmas.domain.event;
 
 
 import christmas.domain.badge.BadgeCondition;
-import christmas.domain.menu.MenuItem;
+import christmas.domain.orders.MenuItem;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;

@@ -1,4 +1,4 @@
-package christmas.domain.menu;
+package christmas.domain.orders;
 
 public enum MenuCategory {
     APPETIZER,

@@ -1,7 +1,5 @@
 package christmas.domain.orders;
 
-import christmas.domain.menu.MenuCategory;
-import christmas.domain.menu.MenuItem;
 import christmas.validationUtils.OrderItemValidationUtils;
 
 public class OrderItem {
