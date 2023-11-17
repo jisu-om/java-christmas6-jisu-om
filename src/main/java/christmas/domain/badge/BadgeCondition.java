@@ -3,25 +3,22 @@ package christmas.domain.badge;
 import java.util.Arrays;
 
 public enum BadgeCondition {
-    STAR("별", 5_000L, 10_000L),
-    TREE("트리", 10_000L, 20_000L),
-    SANTA("산타", 20_000L, Long.MAX_VALUE),
-    NONE("없음", 0L, 5_000L);
+    NONE("없음", 0L),
+    STAR("별", 5_000L),
+    TREE("트리", 10_000L),
+    SANTA("산타", 20_000L);
 
     private final String badgeName;
     private final long minCondition;
-    private final long maxCondition;
 
-    BadgeCondition(String badgeName, long minCondition, long maxCondition) {
+    BadgeCondition(String badgeName, long minCondition) {
         this.badgeName = badgeName;
         this.minCondition = minCondition;
-        this.maxCondition = maxCondition;
     }
 
     public static BadgeCondition findBadgeByCondition(long totalBenefitAmount) {
         return Arrays.stream(BadgeCondition.values())
-                .filter(badge ->
-                        totalBenefitAmount >= badge.getMinCondition() && totalBenefitAmount < badge.getMaxCondition())
+                .filter(badge -> totalBenefitAmount >= badge.getMinCondition())
                 .findFirst()
                 .orElse(NONE);
     }
@@ -32,9 +29,5 @@ public enum BadgeCondition {
 
     public long getMinCondition() {
         return minCondition;
-    }
-
-    public long getMaxCondition() {
-        return maxCondition;
     }
 }
