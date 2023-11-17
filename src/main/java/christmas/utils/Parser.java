@@ -1,4 +1,4 @@
-package christmas.validationUtils;
+package christmas.utils;
 
 import java.util.List;
 

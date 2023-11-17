@@ -2,7 +2,7 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.dto.OrderItemDto;
-import christmas.validationUtils.Parser;
+import christmas.utils.Parser;
 
 import java.util.List;
 

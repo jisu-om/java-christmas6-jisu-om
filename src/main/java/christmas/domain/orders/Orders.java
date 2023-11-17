@@ -1,6 +1,6 @@
 package christmas.domain.orders;
 
-import christmas.validationUtils.OrdersValidationUtils;
+import christmas.utils.OrdersValidationUtils;
 
 import java.util.List;
 

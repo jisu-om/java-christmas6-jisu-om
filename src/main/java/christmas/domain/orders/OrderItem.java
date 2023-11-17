@@ -1,6 +1,6 @@
 package christmas.domain.orders;
 
-import christmas.validationUtils.OrderItemValidationUtils;
+import christmas.utils.OrderItemValidationUtils;
 
 public class OrderItem {
     private final MenuItem menuItem;

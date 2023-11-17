@@ -1,4 +1,4 @@
-package christmas.validationUtils;
+package christmas.utils;
 
 import static christmas.exception.ErrorMessage.INVALID_ORDERS;
 
