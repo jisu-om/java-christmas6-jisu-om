@@ -1,4 +1,4 @@
-package christmas.constants;
+package christmas.domain.constants;
 
 public final class DateConstants {
     public static final int EVENT_START = 1;

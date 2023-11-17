@@ -9,8 +9,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static christmas.constants.DateConstants.*;
-import static christmas.constants.BenefitConstants.*;
+import static christmas.domain.constants.DateConstants.*;
+import static christmas.domain.constants.BenefitConstants.*;
 import static christmas.domain.orders.MenuCategory.DESSERT;
 import static christmas.domain.orders.MenuCategory.MAIN;
 

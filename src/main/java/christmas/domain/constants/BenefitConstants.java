@@ -1,4 +1,4 @@
-package christmas.constants;
+package christmas.domain.constants;
 
 import christmas.domain.orders.MenuItem;
 

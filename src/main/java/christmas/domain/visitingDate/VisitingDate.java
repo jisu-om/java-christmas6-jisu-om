@@ -2,7 +2,7 @@ package christmas.domain.visitingDate;
 
 import java.util.List;
 
-import static christmas.constants.DateConstants.*;
+import static christmas.domain.constants.DateConstants.*;
 import static christmas.exception.ErrorMessage.INVALID_DATE;
 
 public class VisitingDate {

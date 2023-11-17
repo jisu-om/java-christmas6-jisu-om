@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.constants.BenefitConstants;
+import christmas.domain.constants.BenefitConstants;
 
 public class OutputViewMessageConstants {
     public static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";

@@ -4,7 +4,7 @@ import christmas.domain.badge.BadgeCondition;
 
 import java.util.List;
 
-import static christmas.constants.BenefitConstants.GIVE_AWAY_PRICE;
+import static christmas.domain.constants.BenefitConstants.GIVE_AWAY_PRICE;
 
 public class MatchingEvents {
     private final List<MatchingEvent> events;
