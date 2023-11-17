@@ -1,7 +1,8 @@
 package christmas.domain.visitingDate;
 
-import static christmas.constants.DateConstants.EVENT_END;
-import static christmas.constants.DateConstants.EVENT_START;
+import java.util.List;
+
+import static christmas.constants.DateConstants.*;
 import static christmas.exception.ErrorMessage.INVALID_DATE;
 
 public class VisitingDate {
@@ -20,6 +21,22 @@ public class VisitingDate {
         if (date < EVENT_START || date > EVENT_END) {
             throw new IllegalArgumentException(INVALID_DATE.getMessage());
         }
+    }
+
+    public boolean isChristmasEventActive() {
+        return date <= CHRISTMAS_EVENT_END;
+    }
+
+    public boolean isWeekday() {
+        return date % 7 >= 3 || date % 7 == 0;
+    }
+
+    public boolean isWeekend() {
+        return date % 7 == 1 || date % 7 == 2;
+    }
+
+    public boolean isSpecialDay() {
+        return List.of(3, 10, 17, 24, 25, 31).contains(date);
     }
 
     public int provideDate() {

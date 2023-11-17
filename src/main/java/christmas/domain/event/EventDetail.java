@@ -17,25 +17,25 @@ import static christmas.domain.orders.MenuCategory.MAIN;
 public enum EventDetail {
     CHRISTMAS_D_DAY(
             "크리스마스 디데이 할인",
-            date -> date >= EVENT_START && date <= CHRISTMAS_EVENT_END,
+            VisitingDate::isChristmasEventActive,
             BASE_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> BASE_DISCOUNT + calculatePassedDays(date) * CHRISTMAS_RATE),
     WEEKDAYS(
             "평일 할인",
-            date -> date >= EVENT_START && date <= CHRISTMAS_EVENT_END && (date % 7 >= 3 || date % 7 == 0),
+            VisitingDate::isWeekday,
             BASE_PRICE_CONDITION,
             orders -> orders.existsOrderItemByCategory(DESSERT),
             (date, orders) -> orders.countOrderItemByCategory(DESSERT) * DAILY_RATE),
     WEEKENDS(
             "주말 할인",
-            date -> date >= EVENT_START && date <= EVENT_END && (date % 7 == 1 || date % 7 == 2),
+            VisitingDate::isWeekend,
             BASE_PRICE_CONDITION,
             orders -> orders.existsOrderItemByCategory(MAIN),
             (date, orders) -> orders.countOrderItemByCategory(MAIN) * DAILY_RATE),
     SPECIAL(
             "특별 할인",
-            List.of(3, 10, 17, 24, 25, 31)::contains,
+            VisitingDate::isSpecialDay,
             BASE_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> BASE_DISCOUNT),
@@ -47,12 +47,12 @@ public enum EventDetail {
             (date, orders) -> GIVE_AWAY_PRICE);
 
     private final String eventName;
-    private final Predicate<Integer> dateCondition;
+    private final Predicate<VisitingDate> dateCondition;
     private final long priceCondition;
     private final Function<Orders, Boolean> itemCondition;
     private final BiFunction<VisitingDate, Orders, Long> benefitCalculator;
 
-    EventDetail(String eventName, Predicate<Integer> dateCondition, long priceCondition,
+    EventDetail(String eventName, Predicate<VisitingDate> dateCondition, long priceCondition,
                 Function<Orders, Boolean> itemCondition,
                 BiFunction<VisitingDate, Orders, Long> benefitCalculator) {
         this.eventName = eventName;
@@ -68,7 +68,7 @@ public enum EventDetail {
 
     public static List<MatchingEvent> findByCondition(VisitingDate date, Orders orders) {
         return Arrays.stream(EventDetail.values())
-                .filter(condition -> condition.dateCondition.test(date.provideDate()))
+                .filter(condition -> condition.dateCondition.test(date))
                 .filter(condition -> orders.calculateOriginalTotalAmount() >= condition.priceCondition)
                 .filter(condition -> condition.itemCondition.apply(orders))
                 .map(eventDetail -> MatchingEvent.of(eventDetail, eventDetail.calculateBenefitAmount(date, orders)))
