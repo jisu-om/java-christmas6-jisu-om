@@ -60,7 +60,7 @@ public class ChristmasController {
     private <T> T readUserInput(Supplier<T> supplier) {
         while (true) {
             try {
-                supplier.get();
+                return supplier.get();
             } catch (IllegalArgumentException e) {
                 outputView.printError(e.getMessage());
             }

@@ -23,6 +23,10 @@ public class VisitingDate {
         }
     }
 
+    public boolean meetsGiveAwayDateCondition() {
+        return true;
+    }
+
     public boolean isChristmasEventActive() {
         return date <= CHRISTMAS_EVENT_END;
     }

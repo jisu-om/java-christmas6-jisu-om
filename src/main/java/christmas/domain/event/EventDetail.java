@@ -41,7 +41,7 @@ public enum EventDetail {
             (date, orders) -> BASE_DISCOUNT),
     GIVE_AWAY(
             "증정 이벤트",
-            date -> date >= EVENT_START && date <= EVENT_END,
+            VisitingDate::meetsGiveAwayDateCondition,
             GIVE_AWAY_PRICE_CONDITION,
             orders -> true,
             (date, orders) -> GIVE_AWAY_PRICE);

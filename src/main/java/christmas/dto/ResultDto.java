@@ -10,7 +10,7 @@ public class ResultDto {
     private final long originalTotalAmount;
     private final boolean containsGiveAway;
     private final long totalBenefitAmount;
-    private final long totalDiscountAmount;
+    private final long expectedTotalAmount;
     private final String badgeName;
 
     private ResultDto(MatchingEvents events, Orders orders) {
@@ -20,7 +20,7 @@ public class ResultDto {
         this.originalTotalAmount = orders.calculateOriginalTotalAmount();
         this.containsGiveAway = events.containsGiveAway();
         this.totalBenefitAmount = events.calculateTotalBenefitAmount();
-        this.totalDiscountAmount = events.calculateTotalDiscountAmount();
+        this.expectedTotalAmount = originalTotalAmount - events.calculateTotalDiscountAmount();
         this.badgeName = events.findBadgeName();
     }
 
@@ -45,7 +45,7 @@ public class ResultDto {
     }
 
     public long getExpectedTotalAmount() {
-        return originalTotalAmount - totalDiscountAmount;
+        return expectedTotalAmount;
     }
 
     public String getBadgeName() {
