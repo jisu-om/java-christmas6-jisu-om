@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.constants.DiscountConstants;
+import christmas.constants.BenefitConstants;
 
 public class OutputViewMessageConstants {
     public static final String START_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -10,7 +10,7 @@ public class OutputViewMessageConstants {
     public static final String ORIGINAL_TOTAL_AMOUNT_TITLE = "<할인 전 총주문 금액>";
     public static final String TOTAL_AMOUNT_FORMAT = "%,d원";
     public static final String GIVE_AWAY_TITLE = "<증정 메뉴>";
-    public static final String GIVE_AWAY_FORMAT = String.format("%s 1개", DiscountConstants.GIVE_AWAY_ITEM);
+    public static final String GIVE_AWAY_FORMAT = String.format("%s %d개", BenefitConstants.GIVE_AWAY_ITEM, BenefitConstants.GIVE_AWAY_QUANTITY);
     public static final String DEFAULT = "없음";
     public static final String MATCHING_EVENTS_TITLE = "<혜택 내역>";
     public static final String MATCHING_EVENT_FORMAT = "%s: -%,d원";

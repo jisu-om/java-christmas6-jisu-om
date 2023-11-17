@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static christmas.constants.DateConstants.*;
-import static christmas.constants.DiscountConstants.*;
+import static christmas.constants.BenefitConstants.*;
 import static christmas.domain.orders.MenuCategory.DESSERT;
 import static christmas.domain.orders.MenuCategory.MAIN;
 
