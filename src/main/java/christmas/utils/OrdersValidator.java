@@ -1,12 +1,11 @@
 package christmas.utils;
 
-import christmas.domain.Menu;
-import christmas.domain.OrderItem;
+import christmas.domain.orders.OrderItem;
 import org.junit.platform.commons.util.StringUtils;
 
 import java.util.List;
 
-import static christmas.domain.MenuType.DRINK;
+import static christmas.domain.menu.MenuType.DRINK;
 import static christmas.exception.ErrorMessage.INVALID_ORDERS;
 
 public class OrdersValidator {
@@ -49,7 +48,7 @@ public class OrdersValidator {
 
     public static void validateOnlyDrink(List<OrderItem> orderItems) {
         boolean isOnlyDrink = orderItems.stream()
-                .allMatch(item -> item.isEqualMenuType(DRINK));
+                .allMatch(item -> item.isMenuType(DRINK));
         if (isOnlyDrink) {
              throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
          }

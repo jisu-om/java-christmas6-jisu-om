@@ -1,6 +1,6 @@
 package christmas.dto;
 
-import christmas.domain.Orders;
+import christmas.domain.orders.Orders;
 
 import java.util.List;
 

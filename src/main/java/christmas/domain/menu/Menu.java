@@ -1,8 +1,8 @@
-package christmas.domain;
+package christmas.domain.menu;
 
 import java.util.Arrays;
 
-import static christmas.domain.MenuType.*;
+import static christmas.domain.menu.MenuType.*;
 import static christmas.exception.ErrorMessage.INVALID_ORDERS;
 
 public enum Menu {
@@ -38,8 +38,11 @@ public enum Menu {
         return this.name().equals(name);
     }
 
-    public boolean isEqualMenuType(MenuType menuType) {
+    public boolean isMenuType(MenuType menuType) {
         return type == menuType;
     }
 
+    public long getPrice() {
+        return price;
+    }
 }

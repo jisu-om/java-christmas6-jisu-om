@@ -1,5 +1,7 @@
-package christmas.domain;
+package christmas.domain.orders;
 
+import christmas.domain.menu.Menu;
+import christmas.domain.menu.MenuType;
 import christmas.utils.OrderItemValidator;
 
 public class OrderItem {
@@ -17,8 +19,12 @@ public class OrderItem {
         return new OrderItem(menu, quantity);
     }
 
-    public boolean isEqualMenuType(MenuType type) {
-        return menu.isEqualMenuType(type);
+    public long calculatePrice() {
+        return menu.getPrice() * quantity;
+    }
+
+    public boolean isMenuType(MenuType type) {
+        return menu.isMenuType(type);
     }
 
     public Menu provideMenu() {

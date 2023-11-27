@@ -1,6 +1,6 @@
 package christmas.dto;
 
-import christmas.domain.OrderItem;
+import christmas.domain.orders.OrderItem;
 
 public class OrderItemDto {
     private final String name;

@@ -1,8 +1,10 @@
 package christmas.controller;
 
-import christmas.domain.OrderItem;
-import christmas.domain.Orders;
-import christmas.domain.VisitingDate;
+import christmas.domain.Reservation;
+import christmas.dto.MatchingEventsDto;
+import christmas.domain.orders.OrderItem;
+import christmas.domain.orders.Orders;
+import christmas.domain.visitingDate.VisitingDate;
 import christmas.dto.OrderItemDto;
 import christmas.dto.OrdersDto;
 import christmas.view.InputView;
@@ -14,7 +16,6 @@ import java.util.function.Supplier;
 public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
-    //private OrderController orderController;  //컨트롤러 추가하는 경우
 
     private MainController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -27,17 +28,14 @@ public class MainController {
 
     public void run() {
         outputView.printStart();
-        VisitingDate visitingDate = createVisitingDate();
+        VisitingDate date = createVisitingDate();
         Orders orders = createOrders();
         outputView.printResultStart();
         OrdersDto ordersDto = OrdersDto.from(orders);
         outputView.printOrderDetail(ordersDto);
+        Reservation reservation = Reservation.of(date, orders);
+        MatchingEventsDto matchingEventsDto = reservation.createMatchingEvents();
     }
-
-    private void initializeControllers() {
-        orderController = OrderController.of(inputView, outputView);
-    }
-
 
     private VisitingDate createVisitingDate() {
         return readUserInput(() -> {
