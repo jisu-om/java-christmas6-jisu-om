@@ -3,8 +3,6 @@ package christmas.domain;
 import christmas.domain.event.EventDetail;
 import christmas.domain.event.MatchingEvent;
 import christmas.domain.event.MatchingEvents;
-import christmas.dto.MatchingEventDto;
-import christmas.dto.MatchingEventsDto;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
 

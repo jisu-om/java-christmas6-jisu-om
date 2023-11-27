@@ -15,6 +15,7 @@ public class OrderItem {
 
     public static OrderItem of(String menuName, int quantity) {
         OrderItemValidator.validatePositive(quantity);
+        OrderItemValidator.validateSize(quantity);
         Menu menu = Menu.findMenuByName(menuName);
         return new OrderItem(menu, quantity);
     }

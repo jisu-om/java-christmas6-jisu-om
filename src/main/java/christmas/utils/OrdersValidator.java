@@ -6,11 +6,11 @@ import org.junit.platform.commons.util.StringUtils;
 import java.util.List;
 
 import static christmas.domain.menu.MenuType.DRINK;
-import static christmas.exception.ErrorMessage.INVALID_ORDERS;
+import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
 public class OrdersValidator {
     private static final int ORDER_PAIR_SIZE = 2;
-    private static final int MAXIMUM_TOTAL_QUANTITY = 20;
+    public static final int MAXIMUM_TOTAL_QUANTITY = 20;
 
     public static List<String> safeSplit(String input, String delimiter) {
         validateEmpty(input);
@@ -20,13 +20,13 @@ public class OrdersValidator {
 
     private static void validateEmpty(String input) {
         if (StringUtils.isBlank(input)) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
     private static void validateStartsOrEndsWithDelimiter(String input, String delimiter) {
         if (input.startsWith(delimiter) || input.endsWith(delimiter)) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
@@ -34,13 +34,13 @@ public class OrdersValidator {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
     public static void validatePair(List<String> pair) {
         if (pair.size() != ORDER_PAIR_SIZE) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class OrdersValidator {
                 .distinct()
                 .count();
         if (orderItems.size() != uniqueMenuCount) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class OrdersValidator {
         boolean isOnlyDrink = orderItems.stream()
                 .allMatch(item -> item.isMenuType(DRINK));
         if (isOnlyDrink) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 
@@ -67,7 +67,7 @@ public class OrdersValidator {
                 .mapToInt(OrderItem::provideQuantity)
                 .sum();
         if (totalQuantity > MAXIMUM_TOTAL_QUANTITY) {
-            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
         }
     }
 }

@@ -3,7 +3,7 @@ package christmas.domain.menu;
 import java.util.Arrays;
 
 import static christmas.domain.menu.MenuType.*;
-import static christmas.exception.ErrorMessage.INVALID_ORDERS;
+import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
 public enum Menu {
     양송이수프(APPETIZER, 6_000),
@@ -31,7 +31,7 @@ public enum Menu {
         return Arrays.stream(Menu.values())
                 .filter(menu -> menu.isEqualName(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDERS.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER.getMessage()));
     }
 
     private boolean isEqualName(String name) {
