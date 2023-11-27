@@ -17,4 +17,9 @@ public class MatchingEventsDto {
     public List<MatchingEventDto> getEvents() {
         return events;
     }
+
+    public boolean isNone() {
+        return events.stream()
+                .anyMatch(MatchingEventDto::isEventNone);
+    }
 }

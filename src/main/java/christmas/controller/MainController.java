@@ -35,6 +35,8 @@ public class MainController {
         outputView.printOrderDetail(ordersDto);
         Reservation reservation = Reservation.of(date, orders);
         MatchingEventsDto matchingEventsDto = reservation.createMatchingEvents();
+
+        outputView.printMatchingEvents(matchingEventsDto);
     }
 
     private VisitingDate createVisitingDate() {

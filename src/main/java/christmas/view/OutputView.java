@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.dto.MatchingEventDto;
+import christmas.dto.MatchingEventsDto;
 import christmas.dto.OrderItemDto;
 import christmas.dto.OrdersDto;
 
@@ -11,7 +13,9 @@ public class OutputView {
     private static final String ORDER_MENU_FORMAT = "%s %d개";
     private static final String ORIGINAL_PRICE_TITLE = "<할인 전 총주문 금액>";
     private static final String GIVE_AWAY_TITLE = "<증정 메뉴>";
+    private static final String DEFAULT_MESSAGE = "없음";
     private static final String BENEFIT_TITLE = "<혜택 내역>";
+    private static final String BENEFIT_FORMAT = "%s: -,%d원";
     private static final String BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String FINAL_PRICE_TITLE = "<할인 후 예상 결제 금액>";
     private static final String BADGE_TITLE = "<12월 이벤트 배지>";
@@ -48,5 +52,18 @@ public class OutputView {
 
     private void printOrder(OrderItemDto orderItemDto) {
         System.out.printf((ORDER_MENU_FORMAT) + "%n", orderItemDto.getName(), orderItemDto.getQuantity());
+    }
+
+    public void printMatchingEvents(MatchingEventsDto eventsDto) {
+        System.out.println(BENEFIT_TITLE);
+        if (eventsDto.isNone()) {
+            System.out.println(DEFAULT_MESSAGE);
+        }
+        eventsDto.getEvents().forEach(this::printMatchingEvent);
+        printLine();
+    }
+
+    private void printMatchingEvent(MatchingEventDto dto) {
+        System.out.printf((BENEFIT_FORMAT) + "%n", dto.getEventName(), dto.getBenefitAmount());
     }
 }

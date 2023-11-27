@@ -22,4 +22,8 @@ public class MatchingEventDto {
     public long getBenefitAmount() {
         return benefitAmount;
     }
+
+    public boolean isEventNone() {
+        return eventDetail == EventDetail.NONE;
+    }
 }

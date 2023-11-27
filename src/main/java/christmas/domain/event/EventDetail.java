@@ -14,7 +14,7 @@ import static christmas.domain.menu.MenuType.MAIN;
 
 public enum EventDetail {
     NONE(null,
-            date -> false,
+            date -> true,
             orders -> orders.calculateTotalPrice() < ORDER_MINIMUM.getAmount(),
             (date, orders) -> 0L),
     CHRISTMAS_D_DAY("크리스마스 디데이 할인",
