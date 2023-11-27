@@ -4,6 +4,7 @@ import christmas.domain.OrderItem;
 import christmas.domain.Orders;
 import christmas.domain.VisitingDate;
 import christmas.dto.OrderItemDto;
+import christmas.dto.OrdersDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -28,7 +29,9 @@ public class MainController {
         outputView.printStart();
         VisitingDate visitingDate = createVisitingDate();
         Orders orders = createOrders();
-
+        outputView.printResultStart();
+        OrdersDto ordersDto = OrdersDto.from(orders);
+        outputView.printOrderDetail(ordersDto);
     }
 
     private void initializeControllers() {

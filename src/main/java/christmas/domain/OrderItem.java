@@ -25,6 +25,10 @@ public class OrderItem {
         return menu;
     }
 
+    public String provideMenuName() {
+        return menu.name();
+    }
+
     public int provideQuantity() {
         return quantity;
     }

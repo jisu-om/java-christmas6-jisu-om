@@ -17,4 +17,8 @@ public class Orders {
         OrdersValidator.validateSize(orderItems);
         return new Orders(orderItems);
     }
+
+    public List<OrderItem> provideOrderItems() {
+        return orderItems;
+    }
 }
