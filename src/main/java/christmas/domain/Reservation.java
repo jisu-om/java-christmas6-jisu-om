@@ -21,7 +21,6 @@ public class Reservation {
         return new Reservation(date, orders);
     }
 
-
     public MatchingEvents createMatchingEvents() {
         List<EventDetail> events = EventDetail.findEventByCondition(date, orders);
         List<MatchingEvent> matchingEvents = events.stream()
