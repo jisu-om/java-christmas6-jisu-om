@@ -6,6 +6,14 @@ public class VisitingDateValidator {
     private static final int START_DATE = 1;
     private static final int END_DATE = 31;
 
+    public static int safeParseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_VISITING_DATE.getMessage());
+        }
+    }
+
     public static void validateDate(int date) {
         if (date < START_DATE || date > END_DATE) {
             throw new IllegalArgumentException(INVALID_VISITING_DATE.getMessage());

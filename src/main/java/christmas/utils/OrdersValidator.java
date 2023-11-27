@@ -30,6 +30,14 @@ public class OrdersValidator {
         }
     }
 
+    public static int safeParseInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+        }
+    }
+
     public static void validatePair(List<String> pair) {
         if (pair.size() != ORDER_PAIR_SIZE) {
             throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
@@ -50,8 +58,8 @@ public class OrdersValidator {
         boolean isOnlyDrink = orderItems.stream()
                 .allMatch(item -> item.isMenuType(DRINK));
         if (isOnlyDrink) {
-             throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
-         }
+            throw new IllegalArgumentException(INVALID_ORDERS.getMessage());
+        }
     }
 
     public static void validateSize(List<OrderItem> orderItems) {

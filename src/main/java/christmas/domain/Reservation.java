@@ -1,6 +1,8 @@
 package christmas.domain;
 
 import christmas.domain.event.EventDetail;
+import christmas.domain.event.MatchingEvent;
+import christmas.domain.event.MatchingEvents;
 import christmas.dto.MatchingEventDto;
 import christmas.dto.MatchingEventsDto;
 import christmas.domain.orders.Orders;
@@ -21,11 +23,12 @@ public class Reservation {
         return new Reservation(date, orders);
     }
 
-    public MatchingEventsDto createMatchingEvents() {
+
+    public MatchingEvents createMatchingEvents() {
         List<EventDetail> events = EventDetail.findEventByCondition(date, orders);
-        List<MatchingEventDto> matchingEventDtos = events.stream()
-                .map(event -> MatchingEventDto.of(event, event.calculateBenefitAmount(date, orders)))
+        List<MatchingEvent> matchingEvents = events.stream()
+                .map(event -> MatchingEvent.of(event, event.calculateBenefitAmount(date, orders)))
                 .toList();
-        return MatchingEventsDto.from(matchingEventDtos);
+        return MatchingEvents.from(matchingEvents);
     }
 }

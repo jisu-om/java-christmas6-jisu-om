@@ -3,7 +3,7 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.dto.OrderItemDto;
 import christmas.utils.OrdersValidator;
-import christmas.utils.Validator;
+import christmas.utils.VisitingDateValidator;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,7 +28,7 @@ public class InputView {
     public int readVisitingDate() {
         System.out.println(VISITING_DATE_MESSAGE);
         String input = Console.readLine();
-        return Validator.safeParseInt(input);
+        return VisitingDateValidator.safeParseInt(input);
     }
 
     public List<OrderItemDto> readOrderItemDtos() {
@@ -48,7 +48,7 @@ public class InputView {
     private OrderItemDto pairToOrderItemDto(List<String> pair) {
         OrdersValidator.validatePair(pair);
         String menuName = pair.get(ORDER_MENU_INDEX);
-        int quantity = Validator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX));
+        int quantity = OrdersValidator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX));
         return OrderItemDto.of(menuName, quantity);
     }
 }

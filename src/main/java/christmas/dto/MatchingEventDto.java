@@ -1,29 +1,24 @@
 package christmas.dto;
 
-import christmas.domain.event.EventDetail;
 
 public class MatchingEventDto {
-    private final EventDetail eventDetail;
+    private final String eventName;
     private final long benefitAmount;
 
-    private MatchingEventDto(EventDetail eventDetail, long benefitAmount) {
-        this.eventDetail = eventDetail;
+    private MatchingEventDto(String eventName, long benefitAmount) {
+        this.eventName = eventName;
         this.benefitAmount = benefitAmount;
     }
 
-    public static MatchingEventDto of(EventDetail eventDetail, long benefitAmount) {
-        return new MatchingEventDto(eventDetail, benefitAmount);
+    public static MatchingEventDto of(String eventName, long benefitAmount) {
+        return new MatchingEventDto(eventName, benefitAmount);
     }
 
     public String getEventName() {
-        return eventDetail.getEventName();
+        return eventName;
     }
 
     public long getBenefitAmount() {
         return benefitAmount;
-    }
-
-    public boolean isEventNone() {
-        return eventDetail == EventDetail.NONE;
     }
 }

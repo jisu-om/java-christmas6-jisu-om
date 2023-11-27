@@ -1,12 +1,11 @@
 package christmas.controller;
 
 import christmas.domain.Reservation;
-import christmas.dto.MatchingEventsDto;
+import christmas.domain.event.MatchingEvents;
+import christmas.dto.*;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
-import christmas.dto.OrderItemDto;
-import christmas.dto.OrdersDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -34,9 +33,9 @@ public class MainController {
         OrdersDto ordersDto = OrdersDto.from(orders);
         outputView.printOrderDetail(ordersDto);
         Reservation reservation = Reservation.of(date, orders);
-        MatchingEventsDto matchingEventsDto = reservation.createMatchingEvents();
-
-        outputView.printMatchingEvents(matchingEventsDto);
+        MatchingEvents matchingEvents = reservation.createMatchingEvents();
+        ResultDto resultDto = ResultDto.of(orders, matchingEvents);
+        outputView.printResult(resultDto);
     }
 
     private VisitingDate createVisitingDate() {
