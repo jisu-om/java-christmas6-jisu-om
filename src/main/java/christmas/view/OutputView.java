@@ -18,8 +18,8 @@ public class OutputView {
     private static final String BENEFIT_TITLE = "<혜택 내역>";
     private static final String BENEFIT_FORMAT = "%s: -%,d원";
     private static final String BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
-    private static final String BENEFIT_AMOUNT_FORMAT = "-%,d원";
-    private static final String BENEFIT_AMOUNT_DEFAULT = "0원";
+    private static final String BENEFIT_AMOUNT_FORMAT = "%,d원";
+    private static final int BENEFIT_AMOUNT_UNIT = -1;
     private static final String FINAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
     private static final String FINAL_AMOUNT_FORMAT = "%,d원";
     private static final String BADGE_TITLE = "<12월 이벤트 배지>";
@@ -99,11 +99,7 @@ public class OutputView {
     public void printBenefitAmount(long benefitAmount) {
         printLine();
         System.out.println(BENEFIT_AMOUNT_TITLE);
-        if (benefitAmount == 0) {
-            System.out.println(BENEFIT_AMOUNT_DEFAULT);
-            return;
-        }
-        System.out.printf((BENEFIT_AMOUNT_FORMAT) + "%n", benefitAmount);
+        System.out.printf((BENEFIT_AMOUNT_FORMAT) + "%n", benefitAmount * BENEFIT_AMOUNT_UNIT);
     }
 
     private void printFinalAmount(long finalAmount) {
