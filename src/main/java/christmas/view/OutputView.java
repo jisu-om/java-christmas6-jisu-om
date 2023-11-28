@@ -11,17 +11,17 @@ public class OutputView {
     private static final String ORDER_MENU_TITLE = "<주문 메뉴>";
     private static final String ORDER_MENU_FORMAT = "%s %d개";
     private static final String ORIGINAL_AMOUNT_TITLE = "<할인 전 총주문 금액>";
-    private static final String ORIGINAL_AMOUNT_FORMAT = ",%d원";
+    private static final String ORIGINAL_AMOUNT_FORMAT = "%,d원";
     private static final String GIVE_AWAY_TITLE = "<증정 메뉴>";
     private static final String GIVE_AWAY_FORMAT = "%s %d개";
     private static final String DEFAULT_MESSAGE = "없음";
     private static final String BENEFIT_TITLE = "<혜택 내역>";
-    private static final String BENEFIT_FORMAT = "%s: -,%d원";
+    private static final String BENEFIT_FORMAT = "%s: -%,d원";
     private static final String BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
-    private static final String BENEFIT_AMOUNT_FORMAT = "-,%d원";
+    private static final String BENEFIT_AMOUNT_FORMAT = "-%,d원";
     private static final String BENEFIT_AMOUNT_DEFAULT = "0원";
     private static final String FINAL_AMOUNT_TITLE = "<할인 후 예상 결제 금액>";
-    private static final String FINAL_AMOUNT_FORMAT = ",%d원";
+    private static final String FINAL_AMOUNT_FORMAT = "%,d원";
     private static final String BADGE_TITLE = "<12월 이벤트 배지>";
 
     private OutputView() {

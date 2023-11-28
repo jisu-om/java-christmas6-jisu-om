@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 
-class ReservationTest {
+class EventFinderTest {
     @DisplayName("생성 테스트")
     @Test
     void create() {
@@ -34,10 +34,10 @@ class ReservationTest {
         VisitingDate visitingDate4 = VisitingDate.from(date4);
 
         // when
-        Reservation reservation1 = Reservation.of(visitingDate1, orders);
-        Reservation reservation2 = Reservation.of(visitingDate2, orders);
-        Reservation reservation3 = Reservation.of(visitingDate3, orders);
-        Reservation reservation4 = Reservation.of(visitingDate4, orders);
+        EventFinder reservation1 = EventFinder.of(visitingDate1, orders);
+        EventFinder reservation2 = EventFinder.of(visitingDate2, orders);
+        EventFinder reservation3 = EventFinder.of(visitingDate3, orders);
+        EventFinder reservation4 = EventFinder.of(visitingDate4, orders);
 
         MatchingEvents matchingEvents1 = reservation1.createMatchingEvents();
         MatchingEvents matchingEvents2 = reservation2.createMatchingEvents();

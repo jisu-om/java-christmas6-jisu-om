@@ -8,20 +8,10 @@ import christmas.domain.visitingDate.VisitingDate;
 
 import java.util.List;
 
-public class Reservation {
-    private final VisitingDate date;
-    private final Orders orders;
-
-    private Reservation(VisitingDate date, Orders orders) {
-        this.date = date;
-        this.orders = orders;
+public class EventFinder {
+    private EventFinder() {
     }
-
-    public static Reservation of(VisitingDate date, Orders orders) {
-        return new Reservation(date, orders);
-    }
-
-    public MatchingEvents createMatchingEvents() {
+    public static MatchingEvents findMatchingEvents(VisitingDate date, Orders orders) {
         List<EventDetail> events = EventDetail.findEventByCondition(date, orders);
         List<MatchingEvent> matchingEvents = events.stream()
                 .map(event -> MatchingEvent.of(event, event.calculateBenefitAmount(date, orders)))

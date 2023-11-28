@@ -1,6 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Reservation;
+import christmas.domain.EventFinder;
 import christmas.domain.event.MatchingEvents;
 import christmas.dto.*;
 import christmas.domain.orders.OrderItem;
@@ -32,8 +32,7 @@ public class MainController {
         outputView.printResultStart();
         OrdersDto ordersDto = OrdersDto.from(orders);
         outputView.printOrderDetail(ordersDto);
-        Reservation reservation = Reservation.of(date, orders);
-        MatchingEvents matchingEvents = reservation.createMatchingEvents();
+        MatchingEvents matchingEvents = EventFinder.findMatchingEvents(date, orders);
         ResultDto resultDto = ResultDto.of(orders, matchingEvents);
         outputView.printResult(resultDto);
     }
