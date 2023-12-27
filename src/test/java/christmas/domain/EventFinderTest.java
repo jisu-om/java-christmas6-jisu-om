@@ -1,6 +1,5 @@
 package christmas.domain;
 
-import christmas.domain.event.MatchingEvents;
 import christmas.domain.menu.Menu;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
@@ -9,8 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 
 
 class EventFinderTest {

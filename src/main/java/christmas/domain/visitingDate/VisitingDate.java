@@ -1,8 +1,6 @@
 package christmas.domain.visitingDate;
 
 
-import christmas.utils.VisitingDateValidator;
-
 import static christmas.domain.visitingDate.DateConstants.*;
 
 public class VisitingDate {

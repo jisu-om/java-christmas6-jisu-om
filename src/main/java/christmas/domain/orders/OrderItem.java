@@ -2,7 +2,6 @@ package christmas.domain.orders;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
-import christmas.utils.OrderItemValidator;
 
 public class OrderItem {
     private final Menu menu;

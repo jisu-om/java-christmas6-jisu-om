@@ -1,7 +1,6 @@
 package christmas.domain.orders;
 
 import christmas.domain.menu.MenuType;
-import christmas.utils.OrdersValidator;
 
 import java.util.List;
 
