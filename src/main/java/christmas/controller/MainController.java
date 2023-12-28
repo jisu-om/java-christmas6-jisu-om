@@ -18,13 +18,9 @@ public class MainController {
     private final InputView inputView;
     private final OutputView outputView;
 
-    private MainController(InputView inputView, OutputView outputView) {
+    public MainController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-    }
-
-    public static MainController create() {
-        return new MainController(InputView.getInstance(), OutputView.getInstance());
     }
 
     public void run() {
