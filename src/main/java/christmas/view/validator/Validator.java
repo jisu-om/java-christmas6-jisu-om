@@ -1,4 +1,4 @@
-package christmas.utils.validator;
+package christmas.view.validator;
 
 public class Validator {
     public static int safeParseInt(String input, String errorMessage) {

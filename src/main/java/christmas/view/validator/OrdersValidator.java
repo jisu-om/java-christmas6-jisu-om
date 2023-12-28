@@ -1,4 +1,4 @@
-package christmas.utils.validator;
+package christmas.view.validator;
 
 import org.junit.platform.commons.util.StringUtils;
 

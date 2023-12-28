@@ -2,9 +2,8 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.dto.OrderItemDto;
-import christmas.exception.ErrorMessage;
-import christmas.utils.validator.OrdersValidator;
-import christmas.utils.validator.Validator;
+import christmas.view.validator.OrdersValidator;
+import christmas.view.validator.Validator;
 
 import java.util.List;
 import java.util.stream.Collectors;
