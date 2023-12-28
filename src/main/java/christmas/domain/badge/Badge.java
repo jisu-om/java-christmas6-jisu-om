@@ -2,8 +2,10 @@ package christmas.domain.badge;
 
 import java.util.Arrays;
 
+import static christmas.exception.ErrorMessage.INVALID_BADGE_FINDER_PARAMETER;
+
 public enum Badge {
-    NONE(null, 0L, 5_000),
+    NONE("", 0L, 5_000),
     STAR("별", 5_000, 10_000),
     TREE("트리", 10_000, 20_000),
     SANTA("산타", 20_000, Long.MAX_VALUE);
@@ -23,7 +25,7 @@ public enum Badge {
                 .filter(badge -> totalBenefitAmount >= badge.getMinimumBenefitAmount()
                         && totalBenefitAmount < badge.getMaximumBenefitAmount())
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new IllegalStateException(INVALID_BADGE_FINDER_PARAMETER.getMessage()));
     }
 
     public long getMinimumBenefitAmount() {

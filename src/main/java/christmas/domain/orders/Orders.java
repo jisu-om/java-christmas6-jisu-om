@@ -4,7 +4,10 @@ import christmas.domain.menu.MenuType;
 
 import java.util.List;
 
+import static christmas.exception.ErrorMessage.INVALID_ORDER;
+
 public class Orders {
+    private static final int MAX_QUANTITY = 20;
     private final List<OrderItem> orderItems;
 
     private Orders(List<OrderItem> orderItems) {
@@ -12,15 +15,46 @@ public class Orders {
     }
 
     public static Orders from(List<OrderItem> orderItems) {
-        OrdersValidator.validateDuplicate(orderItems);
-        OrdersValidator.validateOnlyDrink(orderItems);
-        OrdersValidator.validateSize(orderItems);
+        validateOrderItems(orderItems);
         return new Orders(orderItems);
     }
 
-    public long calculateTotalPrice() {
+    private static void validateOrderItems(List<OrderItem> orderItems) {
+        validateDuplicate(orderItems);
+        validateOnlyDrink(orderItems);
+        validateSize(orderItems);
+    }
+
+    private static void validateDuplicate(List<OrderItem> orderItems) {
+        long uniqueMenuCount = orderItems.stream()
+                .map(OrderItem::provideMenu)
+                .distinct()
+                .count();
+        if (orderItems.size() != uniqueMenuCount) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    private static void validateOnlyDrink(List<OrderItem> orderItems) {
+        boolean isOnlyDrink = orderItems.stream()
+                .allMatch(item -> item.isMenuType(MenuType.DRINK));
+        if (isOnlyDrink) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    private static void validateSize(List<OrderItem> orderItems) {
+        int totalQuantity = orderItems.stream()
+                .mapToInt(OrderItem::provideQuantity)
+                .sum();
+        if (totalQuantity > MAX_QUANTITY) {
+            throw new IllegalArgumentException(INVALID_ORDER.getMessage());
+        }
+    }
+
+    public int calculateTotalPrice() {
         return orderItems.stream()
-                .mapToLong(OrderItem::calculatePrice)
+                .mapToInt(OrderItem::calculatePrice)
                 .sum();
     }
 
@@ -37,6 +71,6 @@ public class Orders {
     }
 
     public List<OrderItem> provideOrderItems() {
-        return orderItems;
+        return List.copyOf(orderItems);
     }
 }

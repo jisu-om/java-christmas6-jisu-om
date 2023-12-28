@@ -10,6 +10,4 @@ public abstract class Discount implements Event {
     protected Discount(VisitingDate date) {
         this.date = date;
     }
-
-    public abstract int getBenefitAmount();
 }

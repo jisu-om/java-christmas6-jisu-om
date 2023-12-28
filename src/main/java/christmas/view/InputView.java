@@ -1,9 +1,15 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.dto.OrderItemDto;
+import christmas.exception.ErrorMessage;
+import christmas.utils.validator.OrdersValidator;
+import christmas.utils.validator.Validator;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static christmas.exception.ErrorMessage.*;
 
 public class InputView {
     private static final InputView instance = new InputView();
@@ -25,7 +31,7 @@ public class InputView {
     public int readVisitingDate() {
         System.out.println(VISITING_DATE_MESSAGE);
         String input = Console.readLine();
-        return VisitingDateValidator.safeParseInt(input);
+        return Validator.safeParseInt(input, INVALID_VISITING_DATE.getMessage());
     }
 
     public List<OrderItemDto> readOrderItemDtos() {
@@ -45,7 +51,7 @@ public class InputView {
     private OrderItemDto pairToOrderItemDto(List<String> pair) {
         OrdersValidator.validatePair(pair);
         String menuName = pair.get(ORDER_MENU_INDEX);
-        int quantity = OrdersValidator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX));
+        int quantity = OrdersValidator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX), INVALID_ORDER.getMessage());
         return OrderItemDto.of(menuName, quantity);
     }
 }

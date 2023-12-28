@@ -3,24 +3,25 @@ package christmas.domain.orders;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuType;
 
+import static christmas.exception.ErrorMessage.*;
+
 public class OrderItem {
     private final Menu menu;
-    private final int quantity;
+    private final Quantity quantity;
 
-    private OrderItem(Menu menu, int quantity) {
+    private OrderItem(Menu menu, Quantity quantity) {
         this.menu = menu;
         this.quantity = quantity;
     }
 
     public static OrderItem of(String menuName, int quantity) {
-        OrderItemValidator.validatePositive(quantity);
-        OrderItemValidator.validateSize(quantity);
         Menu menu = Menu.findMenuByName(menuName);
-        return new OrderItem(menu, quantity);
+        Quantity validQuantity = Quantity.from(quantity);
+        return new OrderItem(menu, validQuantity);
     }
 
-    public long calculatePrice() {
-        return menu.getPrice() * quantity;
+    public int calculatePrice() {
+        return menu.getPrice() * quantity.getQuantity();
     }
 
     public boolean isMenuType(MenuType type) {
@@ -36,6 +37,6 @@ public class OrderItem {
     }
 
     public int provideQuantity() {
-        return quantity;
+        return quantity.getQuantity();
     }
 }

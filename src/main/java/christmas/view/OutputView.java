@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.constants.BenefitConstants;
 import christmas.dto.*;
 import org.junit.platform.commons.util.StringUtils;
 
@@ -16,7 +15,6 @@ public class OutputView {
     private static final String GIVE_AWAY_FORMAT = "%s %d개";
     private static final String DEFAULT_MESSAGE = "없음";
     private static final String BENEFIT_TITLE = "<혜택 내역>";
-    private static final String BENEFIT_FORMAT = "%s: -%,d원";
     private static final String BENEFIT_AMOUNT_TITLE = "<총혜택 금액>";
     private static final String BENEFIT_AMOUNT_FORMAT = "%,d원";
     private static final int BENEFIT_AMOUNT_UNIT = -1;
@@ -46,7 +44,7 @@ public class OutputView {
     public void printOrderDetail(OrdersDto ordersDto) {
         printLine();
         System.out.println(ORDER_MENU_TITLE);
-        ordersDto.getOrderItemDtos().forEach(this::printOrder);
+        ordersDto.orderItemDtos().forEach(this::printOrder);
     }
 
     private static void printLine() {
@@ -58,12 +56,12 @@ public class OutputView {
     }
 
     public void printResult(ResultDto resultDto) {
-        printOriginalAmount(resultDto.getOriginalAmount());
-        printGiveAway(resultDto.isContainsGiveAway());
-        printMatchingEvents(resultDto.getMatchingEventsDto());
-        printBenefitAmount(resultDto.getTotalBenefitAmount());
-        printFinalAmount(resultDto.getFinalAmount());
-        printBadgeName(resultDto.getBadgeName());
+        printOriginalAmount(resultDto.originalPrice());
+        printGiveaway(resultDto.containsGiveaway(), resultDto.giveawayItemName());
+        printMatchingEvents(resultDto.eventsDto());
+        printBenefitAmount(resultDto.totalBenefitAmount());
+        printFinalAmount(resultDto.finalPrice());
+        printBadgeName(resultDto.badgeDto().name());
     }
 
     private void printOriginalAmount(long amount) {
@@ -72,28 +70,29 @@ public class OutputView {
         System.out.printf((ORIGINAL_AMOUNT_FORMAT) + "%n", amount);
     }
 
-    private void printGiveAway(boolean containsGiveAway) {
+    private void printGiveaway(boolean containsGiveaway, String giveawayItemName) {
         printLine();
         System.out.println(GIVE_AWAY_TITLE);
-        if (containsGiveAway) {
-            System.out.printf((GIVE_AWAY_FORMAT) + "%n", BenefitConstants.GIVE_AWAY_PRODUCT_NAME, 1);
+        if (containsGiveaway) {
+            System.out.printf((GIVE_AWAY_FORMAT) + "%n", giveawayItemName, 1);
             return;
         }
         System.out.println(DEFAULT_MESSAGE);
     }
 
-    private void printMatchingEvents(MatchingEventsDto matchingEventsDto) {
+    private void printMatchingEvents(EventsDto eventsDto) {
         printLine();
         System.out.println(BENEFIT_TITLE);
-        matchingEventsDto.getEvents().forEach(this::printMatchingEvent);
+        if (eventsDto.eventDtos().isEmpty()) {
+            System.out.println(DEFAULT_MESSAGE);
+        }
+        eventsDto.eventDtos().forEach(this::printMatchingEvent);
     }
 
-    private void printMatchingEvent(MatchingEventDto dto) {
-        if (StringUtils.isBlank(dto.getEventName())) {
+    private void printMatchingEvent(EventDto eventDto) {
+        if (StringUtils.isBlank(eventDto.name())) {
             System.out.println(DEFAULT_MESSAGE);
-            return;
         }
-        System.out.printf((BENEFIT_FORMAT) + "%n", dto.getEventName(), dto.getBenefitAmount());
     }
 
     public void printBenefitAmount(long benefitAmount) {

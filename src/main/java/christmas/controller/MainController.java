@@ -1,5 +1,9 @@
 package christmas.controller;
 
+import christmas.domain.Reservation;
+import christmas.domain.badge.Badge;
+import christmas.domain.badge.BadgeFinder;
+import christmas.domain.event.MatchingEvents;
 import christmas.dto.*;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
@@ -25,13 +29,20 @@ public class MainController {
 
     public void run() {
         outputView.printStart();
+
         VisitingDate date = createVisitingDate();
         Orders orders = createOrders();
         outputView.printResultStart();
+
         OrdersDto ordersDto = OrdersDto.from(orders);
         outputView.printOrderDetail(ordersDto);
-        MatchingEvents matchingEvents = EventFinder.findMatchingEvents(date, orders);
-        ResultDto resultDto = ResultDto.of(orders, matchingEvents);
+
+        processResult(date, orders);
+    }
+
+    private void processResult(VisitingDate date, Orders orders) {
+        Reservation reservation = new Reservation(date, orders);
+        ResultDto resultDto = ResultDto.from(reservation);
         outputView.printResult(resultDto);
     }
 
