@@ -52,6 +52,10 @@ public class Orders {
         }
     }
 
+    public boolean isTotalPriceMoreThan(int totalPrice) {
+        return calculateTotalPrice() >= totalPrice;
+    }
+
     public int calculateTotalPrice() {
         return orderItems.stream()
                 .mapToInt(OrderItem::calculatePrice)

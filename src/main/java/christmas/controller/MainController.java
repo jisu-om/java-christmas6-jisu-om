@@ -1,13 +1,12 @@
 package christmas.controller;
 
 import christmas.domain.Reservation;
-import christmas.domain.badge.Badge;
-import christmas.domain.badge.BadgeFinder;
-import christmas.domain.event.MatchingEvents;
-import christmas.dto.*;
 import christmas.domain.orders.OrderItem;
 import christmas.domain.orders.Orders;
 import christmas.domain.visitingDate.VisitingDate;
+import christmas.dto.OrderItemDto;
+import christmas.dto.OrdersDto;
+import christmas.dto.ResultDto;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -36,12 +35,6 @@ public class MainController {
         processResult(date, orders);
     }
 
-    private void processResult(VisitingDate date, Orders orders) {
-        Reservation reservation = new Reservation(date, orders);
-        ResultDto resultDto = ResultDto.from(reservation);
-        outputView.printResult(resultDto);
-    }
-
     private VisitingDate createVisitingDate() {
         return readUserInput(() -> {
             int input = inputView.readVisitingDate();
@@ -53,7 +46,7 @@ public class MainController {
         return readUserInput(() -> {
             List<OrderItemDto> orderItemDtos = inputView.readOrderItemDtos();
             List<OrderItem> orderItems = orderItemDtos.stream()
-                    .map(dto -> OrderItem.of(dto.getName(), dto.getQuantity()))
+                    .map(dto -> OrderItem.of(dto.name(), dto.quantity()))
                     .toList();
             return Orders.from(orderItems);
         });
@@ -67,5 +60,11 @@ public class MainController {
                 outputView.printError(e.getMessage());
             }
         }
+    }
+
+    private void processResult(VisitingDate date, Orders orders) {
+        Reservation reservation = new Reservation(date, orders);
+        ResultDto resultDto = ResultDto.from(reservation);
+        outputView.printResult(resultDto);
     }
 }

@@ -8,4 +8,7 @@ public class Validator {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
+    private Validator() {
+    }
 }

@@ -6,8 +6,11 @@ import java.util.List;
 
 import static christmas.exception.ErrorMessage.INVALID_ORDER;
 
-public class OrdersValidator extends Validator {
+public class OrdersValidator {
     private static final int ORDER_PAIR_SIZE = 2;
+
+    private OrdersValidator() {
+    }
 
     public static List<String> safeSplit(String input, String delimiter) {
         validateEmpty(input);

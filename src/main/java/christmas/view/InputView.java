@@ -50,7 +50,7 @@ public class InputView {
     private OrderItemDto pairToOrderItemDto(List<String> pair) {
         OrdersValidator.validatePair(pair);
         String menuName = pair.get(ORDER_MENU_INDEX);
-        int quantity = OrdersValidator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX), INVALID_ORDER.getMessage());
+        int quantity = Validator.safeParseInt(pair.get(ORDER_QUANTITY_INDEX), INVALID_ORDER.getMessage());
         return OrderItemDto.of(menuName, quantity);
     }
 }

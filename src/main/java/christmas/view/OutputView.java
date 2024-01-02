@@ -52,7 +52,7 @@ public class OutputView {
     }
 
     private void printOrder(OrderItemDto orderItemDto) {
-        System.out.printf((ORDER_MENU_FORMAT) + "%n", orderItemDto.getName(), orderItemDto.getQuantity());
+        System.out.printf((ORDER_MENU_FORMAT) + "%n", orderItemDto.name(), orderItemDto.quantity());
     }
 
     public void printResult(ResultDto resultDto) {
@@ -61,7 +61,7 @@ public class OutputView {
         printMatchingEvents(resultDto.eventsDto());
         printBenefitAmount(resultDto.totalBenefitAmount());
         printFinalAmount(resultDto.finalPrice());
-        printBadgeName(resultDto.badgeDto().name());
+        printBadgeName(resultDto.badgeName());
     }
 
     private void printOriginalAmount(long amount) {

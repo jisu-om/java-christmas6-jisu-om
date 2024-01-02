@@ -10,4 +10,14 @@ public abstract class Discount implements Event {
     protected Discount(VisitingDate date) {
         this.date = date;
     }
+
+    @Override
+    public boolean isDiscount() {
+        return true;
+    }
+
+    @Override
+    public boolean isGiveaway() {
+        return false;
+    }
 }

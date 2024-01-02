@@ -19,20 +19,15 @@ public class MatchingEvents {
     }
 
     public int calculateTotalDiscountAmount() {
-        if (containsGiveaway()) {
-            int giveawayBenefitAmount = events.stream()
-                    .filter(event -> event instanceof GiveawayEvent)
-                    .mapToInt(Event::getBenefitAmount)
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalStateException(INVALID_GIVEAWAY_BENEFIT_AMOUNT.getMessage()));
-            return calculateTotalBenefitAmount() - giveawayBenefitAmount;
-        }
-        return calculateTotalBenefitAmount();
+        return events.stream()
+                .filter(Event::isDiscount)
+                .mapToInt(Event::getBenefitAmount)
+                .sum();
     }
 
     public boolean containsGiveaway() {
         return events.stream()
-                .anyMatch(event -> event instanceof GiveawayEvent);
+                .anyMatch(Event::isGiveaway);
     }
 
     public List<Event> getMatchingEvents() {
